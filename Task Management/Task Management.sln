@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task Management", "Task Management\Task Management.csproj", "{49127B00-649F-4FAE-AFA6-B4B5DBD4DB11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task Management", "Task Management\Task Management.csproj", "{49127B00-649F-4FAE-AFA6-B4B5DBD4DB11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task Management.Tests", "Task Management.Tests\Task Management.Tests.csproj", "{5272B7FE-01C0-4523-8CDC-2C6B3AAEC32B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{49127B00-649F-4FAE-AFA6-B4B5DBD4DB11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49127B00-649F-4FAE-AFA6-B4B5DBD4DB11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49127B00-649F-4FAE-AFA6-B4B5DBD4DB11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5272B7FE-01C0-4523-8CDC-2C6B3AAEC32B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5272B7FE-01C0-4523-8CDC-2C6B3AAEC32B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5272B7FE-01C0-4523-8CDC-2C6B3AAEC32B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5272B7FE-01C0-4523-8CDC-2C6B3AAEC32B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

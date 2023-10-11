@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task_Management.Models
 {
-    internal class Task
+    public abstract class Task
     {
     }
 }

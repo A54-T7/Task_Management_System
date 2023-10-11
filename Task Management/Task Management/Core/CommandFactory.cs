@@ -32,14 +32,68 @@ namespace Task_Management.Core
             {
                 case CommandType.CreateMember:
                     return new CreateMemberCommand(commandParameters, repository);
+                case CommandType.ShowMembers:
+                    throw new NotImplementedException();
+                case CommandType.ShowMemberActivity:
+                    throw new NotImplementedException();
+                case CommandType.CreateBoard:
+                    throw new NotImplementedException();
+                case CommandType.ShowBoards:
+                    throw new NotImplementedException();
+                case CommandType.ShowBoardActivity:
+                    throw new NotImplementedException();
+                case CommandType.CreateTeam:
+                    throw new NotImplementedException();
+                case CommandType.ShowTeams:
+                    throw new NotImplementedException();
+                case CommandType.ShowTeamActivity:
+                    throw new NotImplementedException();
+                case CommandType.AddTeamMember:
+                    throw new NotImplementedException();
+                case CommandType.ShowTeamMembers:
+                    throw new NotImplementedException();
+                case CommandType.CreateBug:
+                    throw new NotImplementedException();
+                case CommandType.ShowBugs:
+                    throw new NotImplementedException();
+                case CommandType.ChangeBugPriority:
+                    throw new NotImplementedException();
+                case CommandType.ChangeBugSeverity:
+                    throw new NotImplementedException();
+                case CommandType.ChangeBugStatus:
+                    throw new NotImplementedException();
+                case CommandType.CreateStory:
+                    throw new NotImplementedException();
+                case CommandType.ShowStories:
+                    throw new NotImplementedException();
+                case CommandType.ChangeStoryPriority:
+                    throw new NotImplementedException();
+                case CommandType.ChangeStorySize:
+                    throw new NotImplementedException();
+                case CommandType.ChangeStoryStatus:
+                    throw new NotImplementedException();
+                case CommandType.CreateFeedback:
+                    throw new NotImplementedException();
+                case CommandType.ShowFeedback:
+                    throw new NotImplementedException();
+                case CommandType.ChangeFeedbackRating:
+                    throw new NotImplementedException();
+                case CommandType.ChangeFeedbackStatus:
+                    throw new NotImplementedException();
+                case CommandType.AssignPerson:
+                    throw new NotImplementedException();
+                case CommandType.UnassingPerson:
+                    throw new NotImplementedException();
+                case CommandType.ShowAssignees:
+                    throw new NotImplementedException();
+                case CommandType.ShowTasks:
+                    throw new NotImplementedException();
+                case CommandType.AddTaskComment:
+                    throw new NotImplementedException();
                 default:
                     throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
             }
         }
-
-        // Next commands: ShowMembers, ShowMemberActivity
-        // CreateBoard, ShowBoards, ShowBoardActivity
-        // CreateTeam, ShowTeams, ShowTeamActivity
 
 
         // Receives a full line and extracts the command to be executed from it.

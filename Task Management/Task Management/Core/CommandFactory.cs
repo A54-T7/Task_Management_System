@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using Task_Management.Commands.Comms;
 using Task_Management.Commands.Contracts;
 using Task_Management.Core.Contracts;
 using Task_Management.Exceptions;
+using Task_Management.Commands.Enums;
+
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Task_Management.Core
 {
@@ -37,6 +36,11 @@ namespace Task_Management.Core
                     throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
             }
         }
+
+        // Next commands: ShowMembers, ShowMemberActivity
+        // CreateBoard, ShowBoards, ShowBoardActivity
+        // CreateTeam, ShowTeams, ShowTeamActivity
+
 
         // Receives a full line and extracts the command to be executed from it.
         // For example, if the input line is "FilterBy Assignee John", the method will return "FilterBy".

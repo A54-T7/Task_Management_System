@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task_Management.Models.Contracts
 {
-    internal interface ITask
+    public interface ITask
     {
     }
 }

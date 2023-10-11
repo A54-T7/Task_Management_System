@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task_Management.Core.Contracts
 {
-    internal interface IEngine
+    public interface IEngine
     {
+        void Start();
     }
 }

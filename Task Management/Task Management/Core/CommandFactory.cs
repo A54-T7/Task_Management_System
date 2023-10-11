@@ -1,30 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Task_Management.Core.Contracts;
+using Task_Management.Exceptions;
 
 namespace Task_Management.Core
 {
-    internal class CommandFactory
+    public class CommandFactory : ICommandFactory
     {
-/* The application must support the following operations:
-    • Create a new person.
-    • Show all people.
-    • Show person's activity.
-    • Create a new team.
-    • Show all teams.
-    • Show team's activity.
-    • Add person to team.
-    • Show all team members.
-    • Create a new board in a team.
-    • Show all team boards.
-    • Show board's activity.
-    • Create a new Bug/Story/Feedback in a board.
-    • Change the Priority/Severity/Status of a bug.
-    • Change the Priority/Size/Status of a story.
-    • Change the Rating/Status of a feedback.
-    • Assign/Unassign a task to a person.
-    • Add comment to a task. */
+        private const char SplitCommandSymbol = ' ';
+        private const string CommentOpenSymbol = "{{";
+        private const string CommentCloseSymbol = "}}";
+
+        private readonly IRepository repository;
+
+        public CommandFactory(IRepository repository)
+        {
+            this.repository = repository;
+        }
+
+        public ICommand Create(string commandLine)
+        {
+            CommandType commandType = ParseCommandType(commandLine);
+            List<string> commandParameters = ExtractCommandParameters(commandLine);
+
+            switch (commandType)
+            {
+                case CommandType.CreateMember:
+                    return new CreateMemberCommand(commandParameters, repository);
+                default:
+                    throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
+            }
+        }
+
+        // Receives a full line and extracts the command to be executed from it.
+        // For example, if the input line is "FilterBy Assignee John", the method will return "FilterBy".
+        private CommandType ParseCommandType(string commandLine)
+        {
+            string commandName = commandLine.Split(SplitCommandSymbol)[0];
+            Enum.TryParse(commandName, true, out CommandType result);
+            return result;
+        }
+
+
+        // Receives a full line and extracts the parameters that are needed for the command to execute.
+        // For example, if the input line is "FilterBy Assignee John",
+        // the method will return a list of ["Assignee", "John"].
+        private List<string> ExtractCommandParameters(string commandLine)
+        {
+            List<string> parameters = new List<string>();
+
+            var indexOfOpenComment = commandLine.IndexOf(CommentOpenSymbol);
+            var indexOfCloseComment = commandLine.IndexOf(CommentCloseSymbol);
+            if (indexOfOpenComment >= 0)
+            {
+                var commentStartIndex = indexOfOpenComment + CommentOpenSymbol.Length;
+                var commentLength = indexOfCloseComment - CommentCloseSymbol.Length - indexOfOpenComment;
+                string commentParameter = commandLine.Substring(commentStartIndex, commentLength);
+                parameters.Add(commentParameter);
+
+                Regex regex = new Regex("{{.+(?=}})}}");
+                commandLine = regex.Replace(commandLine, string.Empty);
+            }
+
+            var indexOfFirstSeparator = commandLine.IndexOf(SplitCommandSymbol);
+            parameters.AddRange(commandLine.Substring(indexOfFirstSeparator + 1).Split(new[] { SplitCommandSymbol }, StringSplitOptions.RemoveEmptyEntries));
+
+            return parameters;
+        }
     }
 }

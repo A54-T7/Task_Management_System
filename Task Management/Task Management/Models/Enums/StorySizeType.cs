@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task_Management.Models.Enums
 {
-    internal enum StorySizeType
+    public enum StorySizeType
     {
         Small,
         Medium,

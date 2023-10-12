@@ -8,5 +8,15 @@ namespace Task_Management.Models.Contracts
 {
     public interface ITask
     {
+        string Title { get; }
+
+        string Description { get; }
+
+
+        //ToDo
+
+        //IList<IComments> Comments { get; }
+
+        //IList<IHistory> History { get; }
     }
 }

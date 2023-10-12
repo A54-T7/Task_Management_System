@@ -23,7 +23,7 @@ namespace Task_Management.Models
 
             Priority = priority;
             Severity = severity;
-            BugStatus = status;
+            Status = status;
 
         }
 
@@ -59,7 +59,7 @@ namespace Task_Management.Models
             }
         }
 
-        public BugStatusType BugStatus
+        public BugStatusType Status
         {
             get
             {

@@ -11,6 +11,7 @@ namespace Task_Management.Models.Contracts
         string Title { get; }
 
         string Description { get; }
+        int Id { get; }
 
 
         //ToDo

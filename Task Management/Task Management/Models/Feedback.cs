@@ -6,19 +6,42 @@ using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Task_Management.Models.Contracts;
+using Task_Management.Models.Enums;
 
 namespace Task_Management.Models
 {
-    internal class Feedback
+    internal class Feedback : Task, IFeedback
     {
-/* Feedbacks must have an ID, a title, a description, a rating, a status, a list of
-comments and a list of changes history.
-    • Title is a string between 10 and 50 symbols.
-    • Description is a string between 10 and 500 symbols.
-    • Rating is an integer.
-    • Status is one of the following: New, Unscheduled, Scheduled, or Done.
-    • Comments is a list of comments (string messages with author).
-    • History is a list of all changes(string messages) that were done to the
-feedback. */
+        private int rating;
+        private FeedbackStatusType status;
+        public Feedback(string title, string description, int rating, FeedbackStatusType status) : base(title, description)
+        {
+            Rating = rating;
+            Status = status;
+        }
+
+        public int Rating
+        {
+            get
+            {
+                return rating;
+            }
+            private set
+            {
+                rating = value;
+            }
+        }
+
+        public FeedbackStatusType Status
+        {
+            get
+            {
+                return status;
+            }
+            private set
+            {
+                status = value;
+            }
+        }
     }
 }

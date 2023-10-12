@@ -15,6 +15,10 @@ namespace Task_Management.Models
         private const int NameMinLength = 5;
         private const int NameMaxLength = 10;
         private const string NameErrorMessage = "Name must be between 5 and 10 characters long!";
+        public Board(string name)
+        {
+            Name = name;
+        }
 
         public string Name
         {

@@ -9,7 +9,6 @@ namespace Task_Management.Models
 {
     public abstract class Task : ITask
     {
-
         private string title;
         private string description;
         private const int TitleMinLength = 10;
@@ -18,11 +17,14 @@ namespace Task_Management.Models
         private const int DescriptionMaxLength = 500;
         private const string TaskErrorMessage = "Task must be between 10 and 50 characters long!";
         private const string DescriptionErrorMessage = "Description must be between 10 and 500 characters long!";
+        private int id = 1;
 
         public Task(string title, string description)
         {
             Title = title;
             Description = description;
+            Id = id;
+            id++;
         }
 
         public string Title
@@ -48,6 +50,18 @@ namespace Task_Management.Models
             {
                 Validator.ValidateStringRange(value, DescriptionMinLength, DescriptionMaxLength, DescriptionErrorMessage);
                 description = value;
+            }
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            private set
+            {
+                id = value;
             }
         }
     }

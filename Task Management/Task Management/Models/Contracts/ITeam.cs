@@ -8,5 +8,10 @@ namespace Task_Management.Models.Contracts
 {
     public interface ITeam
     {
+        string Name { get; }
+
+        IList<IMember> Members { get; }
+
+        IList<IBoard> Boards { get; }
     }
 }

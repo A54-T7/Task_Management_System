@@ -33,7 +33,7 @@ namespace Task_Management.Commands.Comms
         {
             if (this.Repository.MemberExist(name))
             {
-                string errorMessage = $"Member {name} already exist. Choose a different name!";
+                string errorMessage = $"Member {name} already exists. Choose a different name!";
                 throw new InvalidUserInputException(errorMessage);
             }
 

@@ -43,6 +43,10 @@ namespace Task_Management.Core
         {
             return new Team(name);
         }
+        public IBoard CreateBoard(string name)
+        {
+            return new Board(name);
+        }
 
         public void AddMember(IMember member)
         {
@@ -110,5 +114,7 @@ namespace Task_Management.Core
             }
             throw new EntityNotFoundException($"There is no team with name {teamName}!");
         }
+
+        
     }
 }

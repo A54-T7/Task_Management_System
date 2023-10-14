@@ -58,6 +58,11 @@ namespace Task_Management.Models
             members.Add(member);
         }
 
+        public void AddBoard(IBoard board)
+        {
+            boards.Add(board);
+        }
+
         public string PrintTeamMembers()
         {
             StringBuilder sb = new StringBuilder();

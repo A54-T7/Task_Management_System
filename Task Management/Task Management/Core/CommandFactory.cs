@@ -37,9 +37,9 @@ namespace Task_Management.Core
                 case CommandType.ShowMemberActivity:
                     throw new NotImplementedException();
                 case CommandType.CreateBoard:
-                    throw new NotImplementedException();
+                    return new CreateBoardCommand(commandParameters, repository);
                 case CommandType.ShowBoards:
-                    throw new NotImplementedException();
+                    return new ShowBoardsCommand(commandParameters, repository);
                 case CommandType.ShowBoardActivity:
                     throw new NotImplementedException();
                 case CommandType.CreateTeam:

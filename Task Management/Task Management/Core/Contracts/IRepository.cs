@@ -14,6 +14,7 @@ namespace Task_Management.Core.Contracts
         IList<ITeam> Teams { get; }
         IMember CreateMember(string name);
         ITeam CreateTeam(string name);
+        IBoard CreateBoard(string name);
         void AddMember(IMember member);
         void AddTeam(ITeam team);
         bool MemberExist(string name);

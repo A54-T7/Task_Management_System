@@ -57,5 +57,26 @@ namespace Task_Management.Models
         {
             members.Add(member);
         }
+
+        public string PrintTeamMembers()
+        {
+            StringBuilder sb = new StringBuilder();
+            var counter = 1;
+
+            if (members.Count == 0)
+            {
+                sb.AppendLine("No members!");
+            }
+            else
+            {
+                foreach (var member in members)
+                {
+                    sb.AppendLine($"{counter}. {member.Name}");
+                    counter++;
+                }
+            }
+
+            return sb.ToString().Trim();
+        }
     }
 }

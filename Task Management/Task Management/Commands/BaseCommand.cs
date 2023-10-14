@@ -25,7 +25,7 @@ namespace Task_Management.Commands
 
         public string Execute()
         {
-            throw new NotImplementedException();
+            return this.ExecuteCommand();
         }
 
         protected IRepository Repository { get; }

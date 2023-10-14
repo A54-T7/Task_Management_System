@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +9,9 @@ using Task_Management.Models.Contracts;
 
 namespace Task_Management.Commands.Comms
 {
-    public class CreateMemberCommand : BaseCommand
+    public class CreateTeamCommand : BaseCommand
     {
-        public CreateMemberCommand(List<string> parameters, IRepository repository)
+        public CreateTeamCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
         }
@@ -26,21 +25,21 @@ namespace Task_Management.Commands.Comms
 
             string name = this.CommandParameters[0];
 
-            return this.RegisterMember(name);
+            return this.RegisterTeam(name);
         }
 
-        private string RegisterMember(string name)
+        private string RegisterTeam(string name)
         {
-            if (this.Repository.MemberExist(name))
+            if (this.Repository.TeamExist(name))
             {
-                string errorMessage = $"Member {name} already exist. Choose a different name!";
+                string errorMessage = $"Team {name} already exists. Choose a different name!";
                 throw new InvalidUserInputException(errorMessage);
             }
 
-            IMember member = this.Repository.CreateMember(name);
-            this.Repository.AddMember(member);
+            ITeam team = this.Repository.CreateTeam(name);
+            this.Repository.AddTeam(team);
 
-            return string.Format("Member {0} registered successfully!", name);
+            return string.Format("Team {0} registered successfully!", name);
         }
     }
 }

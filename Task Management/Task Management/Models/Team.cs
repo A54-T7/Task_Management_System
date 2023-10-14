@@ -9,12 +9,15 @@ namespace Task_Management.Models
 {
     internal class Team : ITeam
     {
-        private string name;
-        private List<IMember> members = new List<IMember>();
-        private List<IBoard> boards = new List<IBoard>();
         private const int NameMinLength = 5;
         private const int NameMaxLength = 15;
         private const string NameErrorMessage = "Name must be between 5 and 15 characters long!";
+
+        private string name;
+
+        private List<IMember> members = new List<IMember>();
+        private List<IBoard> boards = new List<IBoard>();
+       
 
         public Team(string name)
         {
@@ -50,5 +53,9 @@ namespace Task_Management.Models
             }
         }
 
+        public void AddTeamMember(IMember member)
+        {
+            members.Add(member);
+        }
     }
 }

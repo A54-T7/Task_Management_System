@@ -18,7 +18,8 @@ namespace Task_Management.Core.Contracts
         void AddTeam(ITeam team);
         bool MemberExist(string name);
         bool TeamExist(string name);
-
+        IMember GetMember(string memberName);
+        ITeam GetTeam(string teamName);
 
     }
 }

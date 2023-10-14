@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Task_Management.Core.Contracts;
 using Task_Management.Models;
 using Task_Management.Models.Contracts;
+using Task_Management.Exceptions;
 
 namespace Task_Management.Core
 {
@@ -86,5 +87,28 @@ namespace Task_Management.Core
             return result;
         }
 
+        public IMember GetMember(string memberName)
+        {
+            foreach (IMember member in members)
+            {
+                if (member.Name.Equals(memberName, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return member;
+                }
+            }
+            throw new EntityNotFoundException($"There is no member with name {memberName}!");
+        }
+
+        public ITeam GetTeam(string teamName)
+        {
+            foreach (ITeam team in teams)
+            {
+                if (team.Name.Equals(teamName, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return team;
+                }
+            }
+            throw new EntityNotFoundException($"There is no team with name {teamName}!");
+        }
     }
 }

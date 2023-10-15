@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Xml.Linq;
 using Task_Management.Models.Contracts;
 using Task_Management.Models.Enums;
 
 namespace Task_Management.Models
 {
-    internal class Feedback : Task, IFeedback
+    public class Feedback : Task, IFeedback
     {
         private int rating;
         private FeedbackStatusType status;
@@ -42,6 +43,10 @@ namespace Task_Management.Models
             {
                 status = value;
             }
+        }
+        public void ChangeRating(int newRating)
+        {
+            Rating = newRating;
         }
     }
 }

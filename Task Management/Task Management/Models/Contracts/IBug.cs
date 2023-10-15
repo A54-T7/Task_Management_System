@@ -17,8 +17,7 @@ namespace Task_Management.Models.Contracts
 
         BugStatusType Status { get; }
 
-        //ToDo
-        //Assignee
+        string Assigne {  get; }
         
     }
 }

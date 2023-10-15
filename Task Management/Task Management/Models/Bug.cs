@@ -15,16 +15,16 @@ namespace Task_Management.Models
         private PriorityType priority;
         private SeverityType severity;
         private BugStatusType status;
+        private string assigne;
 
 
-
-        public Bug(string title, string description, PriorityType priority, SeverityType severity, BugStatusType status) : base(title, description)
+        public Bug(string title, string description, PriorityType priority, SeverityType severity, BugStatusType status, string assigne) : base(title, description)
         {
 
             Priority = priority;
             Severity = severity;
             Status = status;
-
+            Assigne = assigne;
         }
 
         public IList<string> Steps
@@ -71,6 +71,29 @@ namespace Task_Management.Models
             }
         }
 
+        public string Assigne
+        {
+            get
+            {
+                return assigne;
+            }
+            private set
+            {
+                assigne = value;
+            }
+        }
+        public void ChangePriority(PriorityType newPriority)
+        {
+            Priority = newPriority;
+        }
+        public void ChangeSeverity(SeverityType newSeverity)
+        {
+            Severity = newSeverity;
+        }
+        public void ChangeAssigne(string newAssigne)
+        {
+            Assigne = newAssigne;
+        }
 
 
         //    * Bugs must have an ID, a title, a description, a list of steps to reproduce it, a priority, a

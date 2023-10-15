@@ -14,14 +14,15 @@ namespace Task_Management.Models
         private StoryStatusType status;
         private StorySizeType size;
         private PriorityType priority;
+        private string assigne;
 
 
-        public Story(string title, string description, PriorityType priority, StorySizeType size,StoryStatusType status) : base(title, description)
+        public Story(string title, string description, PriorityType priority, StorySizeType size,StoryStatusType status, string assigne) : base(title, description)
         {
             Status = status;
             Size = size;
             Priority = priority;
-
+            Assigne = assigne;
         }
 
         public StoryStatusType Status
@@ -60,8 +61,29 @@ namespace Task_Management.Models
             }
         }
 
-
-
+        public string Assigne
+        {
+            get
+            {
+                return assigne;
+            }
+            private set
+            {
+                assigne = value;
+            }
+        }
+        public void ChangePriority(PriorityType newPriority)
+        {
+            Priority = newPriority;
+        }
+        public void ChangeSize(StorySizeType newSize)
+        {
+            Size = newSize;
+        }
+        public void ChangeAssigne(string newAssigne)
+        {
+            Assigne = newAssigne;
+        }
 
 
 

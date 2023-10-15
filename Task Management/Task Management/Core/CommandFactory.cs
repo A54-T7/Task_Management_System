@@ -35,19 +35,19 @@ namespace Task_Management.Core
                 case CommandType.ShowMembers:
                     return new ShowMembersCommand(repository);
                 case CommandType.ShowMemberActivity:
-                    throw new NotImplementedException();
+                    return new ShowMemberActivityCommand(commandParameters, repository);
                 case CommandType.CreateBoard:
                     return new CreateBoardCommand(commandParameters, repository);
                 case CommandType.ShowBoards:
                     return new ShowBoardsCommand(commandParameters, repository);
                 case CommandType.ShowBoardActivity:
-                    throw new NotImplementedException();
+                    return new ShowBoardActivtyCommand(commandParameters, repository);
                 case CommandType.CreateTeam:
                     return new CreateTeamCommand(commandParameters, repository);
                 case CommandType.ShowTeams:
                     return new ShowTeamsCommand(repository);
                 case CommandType.ShowTeamActivity:
-                    throw new NotImplementedException();
+                    return new ShowTeamActivityCommand(commandParameters, repository);
                 case CommandType.AddTeamMember:
                     return new AddTeamMemberCommand(commandParameters, repository);
                 case CommandType.ShowTeamMembers:

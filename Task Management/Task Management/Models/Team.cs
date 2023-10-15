@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Task_Management.Models.Contracts;
@@ -13,15 +14,16 @@ namespace Task_Management.Models
         private const int NameMaxLength = 15;
         private const string NameErrorMessage = "Name must be between 5 and 15 characters long!";
 
-        private string name;
-
         private List<IMember> members = new List<IMember>();
         private List<IBoard> boards = new List<IBoard>();
-       
+        private List<string> activityLog = new List<string>();
+
+        private string name;
 
         public Team(string name)
         {
             Name = name;
+            AddActivity($"Created team: {Name}");
         }
 
         public string Name
@@ -53,14 +55,29 @@ namespace Task_Management.Models
             }
         }
 
+        public IList<string> ActivityLog
+        {
+            get
+            {
+                return new List<string>(activityLog);
+            }
+        }
+
         public void AddTeamMember(IMember member)
         {
             members.Add(member);
+            AddActivity($"Added member: {member.Name}");
         }
 
         public void AddBoard(IBoard board)
         {
             boards.Add(board);
+            AddActivity($"Created board: {board.Name}");
+        }
+
+        public void AddActivity(string message)
+        {
+            activityLog.Add($"{message} - [{DateTime.Now.ToString("yyyy-MM-dd|HH:mm:ss")}]");
         }
 
         public string PrintTeamMembers()

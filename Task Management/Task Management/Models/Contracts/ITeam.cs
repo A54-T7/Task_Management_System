@@ -11,8 +11,10 @@ namespace Task_Management.Models.Contracts
         string Name { get; }
         IList<IMember> Members { get; }
         IList<IBoard> Boards { get; }
+        IList<string> ActivityLog { get; }
         void AddTeamMember(IMember member);
         void AddBoard(IBoard board);
+        void AddActivity(string message);
         string PrintTeamMembers();
     }
 }

@@ -35,7 +35,6 @@ namespace Task_Management.Commands.Comms
             ITeam team = this.Repository.GetTeam(teamName);
             IBoard board = this.Repository.CreateBoard(boardName);
 
-
             foreach (var item in team.Boards)
             {
                 if (boardName == item.Name)
@@ -46,6 +45,7 @@ namespace Task_Management.Commands.Comms
             }
 
             team.AddBoard(board);
+            board.AddActivity($"Created board {boardName} in team {teamName}.");
 
             return $"Board {boardName} created successfully!";
         }

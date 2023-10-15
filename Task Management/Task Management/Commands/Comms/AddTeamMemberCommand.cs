@@ -37,6 +37,7 @@ namespace Task_Management.Commands.Comms
             IMember member = this.Repository.GetMember(memberName);
 
             team.AddTeamMember(member);
+            member.AddActivity($"{memberName} added to team {teamNameToAdd}");
 
             return $"Member {memberName} added to team {teamNameToAdd}!";
         }

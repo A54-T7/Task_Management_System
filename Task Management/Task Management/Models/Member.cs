@@ -9,15 +9,19 @@ namespace Task_Management.Models
 {
     public class Member : IMember
     {
-        private string name;
-        private List<ITask> tasks = new List<ITask>();
         private const int NameMinLength = 5;
         private const int NameMaxLength = 15;
         private const string NameErrorMessage = "Name must be between 5 and 15 characters long!";
 
+        private List<ITask> tasks = new List<ITask>();
+        private List<string> activityLog = new List<string>();
+
+        private string name;
+
         public Member(string name)
         {
             Name = name;
+            AddActivity($"Created member: {Name}");
         }
 
         public string Name
@@ -40,6 +44,18 @@ namespace Task_Management.Models
             }
         }
 
+        public IList<string> ActivityLog
+        {
+            get
+            {
+                return new List<string>(activityLog);
+            }
+        }
+
+        public void AddActivity(string message)
+        {
+            activityLog.Add($"{message} - [{DateTime.Now.ToString("yyyy-MM-dd|HH:mm:ss")}]");
+        }
         //Add ActivityHistory
     }
 }

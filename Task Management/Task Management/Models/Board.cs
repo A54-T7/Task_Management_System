@@ -56,7 +56,10 @@ namespace Task_Management.Models
         {
             activityLog.Add($"{message} - [{DateTime.Now.ToString("yyyy-MM-dd|HH:mm:ss")}]");
         }
-
+        public void AddTask(ITask task)
+        {
+            tasks.Add(task);
+        }
         //Add ActivityHistory
     }
 }

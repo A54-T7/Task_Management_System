@@ -9,10 +9,8 @@ namespace Task_Management.Models.Contracts
     public interface ITask
     {
         string Title { get; }
-
         string Description { get; }
         int Id { get; }
-
 
         //ToDo
 

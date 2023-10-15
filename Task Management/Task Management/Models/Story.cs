@@ -17,7 +17,8 @@ namespace Task_Management.Models
         private string assigne;
 
 
-        public Story(string title, string description, PriorityType priority, StorySizeType size,StoryStatusType status, string assigne) : base(title, description)
+        public Story(int id, string title, string description, PriorityType priority, StorySizeType size,StoryStatusType status, string assigne) 
+            : base(id, title, description)
         {
             Status = status;
             Size = size;

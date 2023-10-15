@@ -17,10 +17,9 @@ namespace Task_Management.Models
         private BugStatusType status;
         private string assigne;
 
-
-        public Bug(string title, string description, PriorityType priority, SeverityType severity, BugStatusType status, string assigne) : base(title, description)
+        public Bug(int id, string title, string description, PriorityType priority, SeverityType severity, BugStatusType status, string assigne) 
+            : base(id, title, description)
         {
-
             Priority = priority;
             Severity = severity;
             Status = status;

@@ -9,9 +9,9 @@ namespace Task_Management.Models.Contracts
     public interface IBoard
     {
         string Name { get; }
-
         IList<ITask> Tasks { get; }
         IList<string> ActivityLog { get; }
         void AddActivity(string message);
+        void AddTask(ITask task);
     }
 }

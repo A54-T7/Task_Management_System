@@ -73,7 +73,7 @@ namespace Task_Management.Core
                 case CommandType.ChangeStoryStatus:
                     throw new NotImplementedException();
                 case CommandType.CreateFeedback:
-                    throw new NotImplementedException();
+                    return new CreateFeedbackCommand(commandParameters, repository);
                 case CommandType.ShowFeedback:
                     throw new NotImplementedException();
                 case CommandType.ChangeFeedbackRating:

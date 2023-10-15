@@ -36,16 +36,12 @@ namespace Task_Management.Commands.Comms
             int counter = 1;
 
             sb.AppendLine("--BOARD ACTIVITY LOG--");
-            foreach (var board in team.Boards)
+
+            var board = this.Repository.GetBoard(boardName, team);
+            foreach (var activity in board.ActivityLog)
             {
-                if (board.Name == boardName)
-                {
-                    foreach (var activity in board.ActivityLog)
-                    {
-                        sb.AppendLine($"{counter}. {activity}");
-                        counter++;
-                    }
-                }
+                sb.AppendLine($"{counter}. {activity}");
+                counter++;
             }
 
             return sb.ToString().Trim();

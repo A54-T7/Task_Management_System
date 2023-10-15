@@ -8,6 +8,7 @@ using Task_Management.Core.Contracts;
 using Task_Management.Models;
 using Task_Management.Models.Contracts;
 using Task_Management.Exceptions;
+using Task_Management.Models.Enums;
 
 namespace Task_Management.Core
 {
@@ -15,6 +16,7 @@ namespace Task_Management.Core
     {
         private readonly IList<IMember> members = new List<IMember>();
         private readonly IList<ITeam> teams = new List<ITeam>();
+        private readonly IList<ITask> tasks = new List<ITask>();
 
         public IList<IMember> Members
         {
@@ -34,6 +36,15 @@ namespace Task_Management.Core
             }
         }
 
+        public IList<ITask> Tasks
+        {
+            get
+            {
+                var tasksCopy = new List<ITask>(tasks);
+                return tasksCopy;
+            }
+        }
+
         public IMember CreateMember(string name)
         {
             return new Member(name);
@@ -46,6 +57,15 @@ namespace Task_Management.Core
         public IBoard CreateBoard(string name)
         {
             return new Board(name);
+        }
+
+        public IFeedback CreateFeedback(string title, string description, int rating, FeedbackStatusType status)
+        {
+            var nextId = tasks.Count;
+            var feedback = new Feedback(++nextId, title, description, rating, status);
+
+            tasks.Add(feedback);
+            return feedback;
         }
 
         public void AddMember(IMember member)
@@ -115,6 +135,16 @@ namespace Task_Management.Core
             throw new EntityNotFoundException($"There is no team with name {teamName}!");
         }
 
-        
+        public IBoard GetBoard(string boardName, ITeam team)
+        {
+            foreach (var board in team.Boards)
+            {
+                if (board.Name.Equals(boardName, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return board;
+                }
+            }
+            throw new EntityNotFoundException($"There is no board with name {boardName}!");
+        }
     }
 }

@@ -15,7 +15,9 @@ namespace Task_Management.Models
     {
         private int rating;
         private FeedbackStatusType status;
-        public Feedback(string title, string description, int rating, FeedbackStatusType status) : base(title, description)
+
+        public Feedback(int id, string title, string description, int rating, FeedbackStatusType status)
+            : base(id, title, description)
         {
             Rating = rating;
             Status = status;

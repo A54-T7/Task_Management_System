@@ -59,10 +59,10 @@ namespace Task_Management.Core
             return new Board(name);
         }
 
-        public IFeedback CreateFeedback(string title, string description, int rating, FeedbackStatusType status)
+        public IFeedback CreateFeedback(string title, string description, int rating)
         {
             var nextId = tasks.Count;
-            var feedback = new Feedback(++nextId, title, description, rating, status);
+            var feedback = new Feedback(++nextId, title, description, rating);
 
             tasks.Add(feedback);
             return feedback;
@@ -108,6 +108,7 @@ namespace Task_Management.Core
                     break;
                 }
             }
+
             return result;
         }
 
@@ -120,6 +121,7 @@ namespace Task_Management.Core
                     return member;
                 }
             }
+
             throw new EntityNotFoundException($"There is no member with name {memberName}!");
         }
 
@@ -132,6 +134,7 @@ namespace Task_Management.Core
                     return team;
                 }
             }
+
             throw new EntityNotFoundException($"There is no team with name {teamName}!");
         }
 
@@ -144,7 +147,21 @@ namespace Task_Management.Core
                     return board;
                 }
             }
+
             throw new EntityNotFoundException($"There is no board with name {boardName}!");
+        }
+
+        public ITask GetTask(int ID)
+        {
+            foreach (var task in tasks)
+            {
+                if (task.Id == ID)
+                {
+                    return task;
+                }
+            }
+
+            throw new EntityNotFoundException($"There is no task with ID {ID}");
         }
     }
 }

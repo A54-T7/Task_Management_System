@@ -9,7 +9,7 @@ namespace Task_Management.Models.Contracts
 {
     public interface IFeedback : ITask
     {
-        int Rating { get; }
+        int Rating { get; set; }
         FeedbackStatusType Status { get; }
         //ToDo
 

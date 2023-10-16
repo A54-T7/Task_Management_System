@@ -46,13 +46,11 @@ namespace Task_Management.Commands.Comms
             Console.Write("  Rating - ");
             int rating = int.Parse(Console.ReadLine());
 
-            //Console.Write("Status - ");
-            var status = FeedbackStatusType.New;
-
-            var feedback = this.Repository.CreateFeedback(title, description, rating, status);
+            var feedback = this.Repository.CreateFeedback(title, description, rating);
             board.AddTask(feedback);
+            Console.WriteLine(feedback.Description);
 
-            return $"Feedback with id {feedback.Id} was created successfully in team {teamName}, board {boardName}!";
+            return $"Feedback {title} with id {feedback.Id} was created successfully in team {teamName}, board {boardName}!";
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Task_Management.Models
         private const int TitleMaxLength = 50;
         private const int DescriptionMinLength = 10;
         private const int DescriptionMaxLength = 500;
-        private const string TaskErrorMessage = "Task must be between 10 and 50 characters long!";
+        private const string TaskErrorMessage = "Task title must be between 10 and 50 characters long!";
         private const string DescriptionErrorMessage = "Description must be between 10 and 500 characters long!";
 
         private string title;

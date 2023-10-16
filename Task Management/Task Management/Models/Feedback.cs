@@ -16,11 +16,11 @@ namespace Task_Management.Models
         private int rating;
         private FeedbackStatusType status;
 
-        public Feedback(int id, string title, string description, int rating, FeedbackStatusType status)
+        public Feedback(int id, string title, string description, int rating)
             : base(id, title, description)
         {
             Rating = rating;
-            Status = status;
+            Status = FeedbackStatusType.New;
         }
 
         public int Rating
@@ -29,7 +29,7 @@ namespace Task_Management.Models
             {
                 return rating;
             }
-            private set
+            set
             {
                 rating = value;
             }

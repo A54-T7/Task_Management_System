@@ -16,7 +16,7 @@ namespace Task_Management.Core.Contracts
         IMember CreateMember(string name);
         ITeam CreateTeam(string name);
         IBoard CreateBoard(string name);
-        IFeedback CreateFeedback(string title, string description, int rating, FeedbackStatusType status);
+        IFeedback CreateFeedback(string title, string description, int rating);
         void AddMember(IMember member);
         void AddTeam(ITeam team);
         bool MemberExist(string name);
@@ -24,6 +24,7 @@ namespace Task_Management.Core.Contracts
         IMember GetMember(string memberName);
         ITeam GetTeam(string teamName);
         IBoard GetBoard(string boardName, ITeam team);
+        ITask GetTask(int ID);
 
     }
 }

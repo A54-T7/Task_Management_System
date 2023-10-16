@@ -53,5 +53,16 @@ namespace Task_Management.Models
                 description = value;
             }
         }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"Task: {GetType().Name}");
+            sb.AppendLine($"  Title: {Title}");
+            sb.AppendLine($"  Description: {Description}");
+
+            return sb.ToString();
+        }
     }
 }

@@ -30,13 +30,13 @@ namespace Task_Management.Commands.Enums
         ChangeStorySize,
         ChangeStoryStatus,
         CreateFeedback,
-        ShowFeedback,
+        ListFeedback,
         ChangeFeedbackRating,
         ChangeFeedbackStatus,
-        AssignPerson, //AssignTask
-        UnassingPerson, //UnassignTask
+        AssignPerson,
+        UnassingPerson,
         ShowAssignees,
-        ShowTasks,
+        ListTasks,
         AddTaskComment
     }
 }

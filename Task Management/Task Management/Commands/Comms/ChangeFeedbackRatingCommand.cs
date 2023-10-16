@@ -23,8 +23,6 @@ namespace Task_Management.Commands.Comms
                 throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2, Received: {this.CommandParameters.Count}");
             }
 
-            //this.ParseDecimalParameter(this.CommandParameters[3], "price");
-
             int taskID = this.ParseIntParameter(this.CommandParameters[0], "ID");
             int newRating = this.ParseIntParameter(this.CommandParameters[1], "Rating");
 
@@ -42,7 +40,7 @@ namespace Task_Management.Commands.Comms
             }
 
             var feedback = (IFeedback)task;
-            feedback.Rating = newRating;
+            feedback.ChangeRating(newRating);
 
             return $"Changed the rating of feedback with ID {taskID} to {newRating}!";
         }

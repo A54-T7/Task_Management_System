@@ -29,7 +29,7 @@ namespace Task_Management.Models
             {
                 return rating;
             }
-            set
+            private set
             {
                 rating = value;
             }
@@ -46,9 +46,21 @@ namespace Task_Management.Models
                 status = value;
             }
         }
+
         public void ChangeRating(int newRating)
         {
             Rating = newRating;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder feedbackInfo = new StringBuilder();
+
+            feedbackInfo.Append(base.ToString());
+            feedbackInfo.AppendLine($"  Rating: {Rating}");
+            feedbackInfo.AppendLine($"  Status: {Status}");
+
+            return feedbackInfo.ToString().Trim();
         }
     }
 }

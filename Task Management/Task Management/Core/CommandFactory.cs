@@ -74,8 +74,8 @@ namespace Task_Management.Core
                     throw new NotImplementedException();
                 case CommandType.CreateFeedback:
                     return new CreateFeedbackCommand(commandParameters, repository);
-                case CommandType.ShowFeedback:
-                    throw new NotImplementedException();
+                case CommandType.ListFeedback:
+                    return new ListFeedbackCommand(commandParameters, repository);
                 case CommandType.ChangeFeedbackRating:
                     return new ChangeFeedbackRatingCommand(commandParameters, repository);
                 case CommandType.ChangeFeedbackStatus:
@@ -86,7 +86,7 @@ namespace Task_Management.Core
                     throw new NotImplementedException();
                 case CommandType.ShowAssignees:
                     throw new NotImplementedException();
-                case CommandType.ShowTasks:
+                case CommandType.ListTasks:
                     throw new NotImplementedException();
                 case CommandType.AddTaskComment:
                     throw new NotImplementedException();

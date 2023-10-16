@@ -18,7 +18,24 @@ namespace Task_Management.Commands.Comms
 
         protected override string ExecuteCommand()
         {
+            if (this.CommandParameters.Count != 2)
+            {
+                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2, Received: {this.CommandParameters.Count}");
+            }
+
+            int taskID = this.ParseIntParameter(this.CommandParameters[0], "ID");
+            string keyword = CommandParameters[1];
+
+            return ChangeStatus(taskID, keyword);
+        }
+
+        public string ChangeStatus(int taskID, string keyword)
+        {
+            var feedback = this.Repository.GetFeedback(taskID);
+
             throw new NotImplementedException();
+
+            return $"Changed the status of feedback {feedback.Title} with ID {feedback.Id} to !";
         }
     }
 }

@@ -25,8 +25,6 @@ namespace Task_Management.Commands.Comms
             }
 
             string keyword = CommandParameters[0];
-            // var feedbacks = Repository.Tasks.OfType<Feedback>().ToList();
-
 
             return ListFeedback(keyword);
         }

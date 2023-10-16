@@ -17,6 +17,8 @@ namespace Task_Management.Core
         private readonly IList<IMember> members = new List<IMember>();
         private readonly IList<ITeam> teams = new List<ITeam>();
         private readonly IList<ITask> tasks = new List<ITask>();
+        private readonly IList<IFeedback> feedbacks = new List<IFeedback>();
+
 
         public IList<IMember> Members
         {
@@ -45,6 +47,15 @@ namespace Task_Management.Core
             }
         }
 
+        public IList<IFeedback> Feedbacks
+        {
+            get
+            {
+                var feedbacksCopy = new List<IFeedback>(feedbacks);
+                return feedbacksCopy;
+            }
+        }
+
         public IMember CreateMember(string name)
         {
             return new Member(name);
@@ -65,7 +76,13 @@ namespace Task_Management.Core
             var feedback = new Feedback(++nextId, title, description, rating);
 
             tasks.Add(feedback);
+            feedbacks.Add(feedback);
             return feedback;
+        }
+
+        public IComment CreateComment(string content, string author)
+        {
+            return new Comment(content, author);
         }
 
         public void AddMember(IMember member)
@@ -163,5 +180,20 @@ namespace Task_Management.Core
 
             throw new EntityNotFoundException($"There is no task with ID {ID}");
         }
+
+        public IFeedback GetFeedback(int ID)
+        {
+            foreach (IFeedback feedback in feedbacks)
+            {
+                if (feedback.Id == ID)
+                {
+                    return feedback;
+                }
+            }
+
+            throw new EntityNotFoundException($"There is no feedback with ID {ID}");
+        }
+
+        
     }
 }

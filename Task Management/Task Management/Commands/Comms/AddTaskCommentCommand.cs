@@ -33,7 +33,8 @@ namespace Task_Management.Commands.Comms
 
         public string CreateComment(int taskID)
         {
-            var task = this.Repository.GetTask(taskID);
+            //var task = this.Repository.GetTask(taskID);
+            var feedback = this.Repository.GetFeedback(taskID);
 
             Console.Write("  Comment - ");
             string content = Console.ReadLine();
@@ -42,11 +43,14 @@ namespace Task_Management.Commands.Comms
             string author = Console.ReadLine();
 
             var member = this.Repository.GetMember(author);
-            var comment = new Comment(member.Name, content);
 
-            task.AddComment(comment);
+            var newComment = this.Repository.CreateComment(content, author);
 
-            return $"{member.Name} added a new comment to {task.GetType().Name} successfully!";
+            //task.AddComment(newComment);
+            //this.Repository.LoggedUser.AddComment(comment, vehicle);
+
+
+            return $"{member.Name} added a new comment to {feedback.Title} successfully!";
         }
     }
 }

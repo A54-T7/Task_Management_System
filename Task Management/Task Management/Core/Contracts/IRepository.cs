@@ -13,10 +13,12 @@ namespace Task_Management.Core.Contracts
         IList<IMember> Members { get; }
         IList<ITeam> Teams { get; }
         IList<ITask> Tasks { get; }
+        IList<IFeedback> Feedbacks { get; }
         IMember CreateMember(string name);
         ITeam CreateTeam(string name);
         IBoard CreateBoard(string name);
         IFeedback CreateFeedback(string title, string description, int rating);
+        public IComment CreateComment(string content, string author);
         void AddMember(IMember member);
         void AddTeam(ITeam team);
         bool MemberExist(string name);
@@ -25,6 +27,6 @@ namespace Task_Management.Core.Contracts
         ITeam GetTeam(string teamName);
         IBoard GetBoard(string boardName, ITeam team);
         ITask GetTask(int ID);
-
+        IFeedback GetFeedback(int ID);
     }
 }

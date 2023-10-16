@@ -31,18 +31,10 @@ namespace Task_Management.Commands.Comms
 
         public string ChangeRating(int taskID, int newRating)
         {
-            var task = this.Repository.GetTask(taskID);
-
-            if (task is IFeedback == false)
-            {
-                string errorMessage = $"Task with ID {taskID} is not a feedback!";
-                throw new InvalidUserInputException(errorMessage);
-            }
-
-            var feedback = (IFeedback)task;
+            var feedback = this.Repository.GetFeedback(taskID);
             feedback.ChangeRating(newRating);
 
-            return $"Changed the rating of feedback with ID {taskID} to {newRating}!";
+            return $"Changed the rating of feedback {feedback.Title} with ID {feedback.Id} to {newRating}!";
         }
     }
 }

@@ -11,10 +11,11 @@ namespace Task_Management.Models.Contracts
         string Title { get; }
         string Description { get; }
         int Id { get; }
+        IList<IComment> Comments { get; }
+        IList<string> ActivityLog { get; }
+        void AddComment(IComment comment);
 
         //ToDo
-
-        //IList<IComments> Comments { get; }
 
         //IList<IHistory> History { get; }
     }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Task_Management.Commands.Contracts;
 using Task_Management.Core.Contracts;
 using Task_Management.Exceptions;
+using Task_Management.Models.Enums;
 
 namespace Task_Management.Commands
 {
@@ -58,6 +59,15 @@ namespace Task_Management.Commands
                 return result;
             }
             throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either true or false.");
+        }
+
+        protected FeedbackStatusType ParseFeedbackStatusTypeParameter(string value, string parameterName)
+        {
+            if (Enum.TryParse(value, true, out FeedbackStatusType result))
+            {
+                return result;
+            }
+            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid vehicle type.");
         }
     }
 }

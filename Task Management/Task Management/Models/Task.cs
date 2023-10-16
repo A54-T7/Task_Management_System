@@ -19,6 +19,10 @@ namespace Task_Management.Models
         private string title;
         private string description;
 
+        private readonly IList<IComment> comments;
+        private readonly IList<string> activityLog;
+
+
         public Task(int id, string title, string description)
         {
             Id = id;
@@ -52,6 +56,41 @@ namespace Task_Management.Models
                 Validator.ValidateStringRange(value, DescriptionMinLength, DescriptionMaxLength, DescriptionErrorMessage);
                 description = value;
             }
+        }
+
+        public IList<IComment> Comments
+        {
+            get
+            {
+                return new List<IComment>(comments);
+            }
+        }
+
+        public IList<string> ActivityLog
+        {
+            get
+            {
+                return new List<string>(activityLog);
+            }
+        }
+
+        public void AddComment(IComment comment)
+        {
+            comments.Add(comment);
+        }
+
+        public string PrintComments()
+        {
+            StringBuilder sb = new StringBuilder();
+            int counter = 1;
+
+            sb.AppendLine("---COMMENTS----");
+
+            foreach (var comment in Comments)
+            {
+                sb.AppendLine($"  {counter++}. {comment.ToString()}");
+            }
+            return sb.ToString().Trim();
         }
 
         public override string ToString()

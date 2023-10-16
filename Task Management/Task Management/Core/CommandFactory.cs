@@ -79,7 +79,7 @@ namespace Task_Management.Core
                 case CommandType.ChangeFeedbackRating:
                     return new ChangeFeedbackRatingCommand(commandParameters, repository);
                 case CommandType.ChangeFeedbackStatus:
-                    throw new NotImplementedException();
+                    return new ChangeFeedbackStatusCommand(commandParameters, repository);
                 case CommandType.AssignPerson:
                     throw new NotImplementedException();
                 case CommandType.UnassingPerson:
@@ -89,7 +89,7 @@ namespace Task_Management.Core
                 case CommandType.ListTasks:
                     throw new NotImplementedException();
                 case CommandType.AddTaskComment:
-                    throw new NotImplementedException();
+                    return new AddTaskCommentCommand(commandParameters, repository);
                 default:
                     throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
             }

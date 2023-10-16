@@ -16,5 +16,13 @@ namespace Task_Management
                 throw new InvalidUserInputException(message);
             }
         }
+
+        public static void ValidateStringNotNullOrEmpty (string value, string message)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new InvalidUserInputException(message);
+            }
+        }
     }
 }

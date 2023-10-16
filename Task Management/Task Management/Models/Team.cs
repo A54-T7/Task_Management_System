@@ -83,7 +83,7 @@ namespace Task_Management.Models
         public string PrintTeamMembers()
         {
             StringBuilder sb = new StringBuilder();
-            var counter = 1;
+            int counter = 1;
 
             if (members.Count == 0)
             {

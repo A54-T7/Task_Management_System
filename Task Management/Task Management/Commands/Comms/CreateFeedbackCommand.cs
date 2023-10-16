@@ -48,7 +48,6 @@ namespace Task_Management.Commands.Comms
 
             var feedback = this.Repository.CreateFeedback(title, description, rating);
             board.AddTask(feedback);
-            Console.WriteLine(feedback.Description);
 
             return $"Feedback {title} with id {feedback.Id} was created successfully in team {teamName}, board {boardName}!";
         }

@@ -22,7 +22,6 @@ namespace Task_Management.Models
         private readonly IList<IComment> comments;
         private readonly IList<string> activityLog;
 
-
         public Task(int id, string title, string description)
         {
             Id = id;

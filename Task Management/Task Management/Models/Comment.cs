@@ -12,6 +12,8 @@ namespace Task_Management.Models
         private string InvalidAuthorError = "Please specify the comment's author!";
         private string InvalidContentError = "Please specify the comment's content!";
 
+        private const string CommentHeader = "    ----------";
+
 
         private string content;
         private string author;
@@ -52,9 +54,13 @@ namespace Task_Management.Models
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine(CommentHeader);
             sb.AppendLine($"  {Content}");
             sb.AppendLine($"    by {Author}");
+            sb.Append(CommentHeader);
+
             return sb.ToString();
+
         }
     }
 }

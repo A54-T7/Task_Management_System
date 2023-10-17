@@ -16,6 +16,9 @@ namespace Task_Management.Models
         private const string TaskErrorMessage = "Task title must be between 10 and 50 characters long!";
         private const string DescriptionErrorMessage = "Description must be between 10 and 500 characters long!";
 
+        private const string CommentsHeader = "    --COMMENTS--";
+        private const string NoCommentsHeader = "    --NO COMMENTS--";
+
         private string title;
         private string description;
 
@@ -86,15 +89,24 @@ namespace Task_Management.Models
         public string PrintComments()
         {
             StringBuilder sb = new StringBuilder();
-            int counter = 1;
 
-            sb.AppendLine("---COMMENTS----");
-
-            foreach (var comment in Comments)
+            if (this.Comments.Count <= 0)
             {
-                sb.AppendLine($"  {counter++}. {comment.ToString()}");
+                sb.AppendLine(NoCommentsHeader);
             }
-            return sb.ToString().Trim();
+            else
+            {
+                sb.AppendLine(CommentsHeader);
+
+                foreach (var comment in this.Comments)
+                {
+                    sb.AppendLine(comment.ToString());
+                }
+
+                sb.AppendLine(CommentsHeader);
+            }
+
+            return sb.ToString().TrimEnd();
         }
 
         public override string ToString()

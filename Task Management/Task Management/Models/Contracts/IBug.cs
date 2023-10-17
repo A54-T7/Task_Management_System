@@ -17,8 +17,7 @@ namespace Task_Management.Models.Contracts
 
         BugStatusType Status { get; }
         void ChangeSeverity(SeverityType newSeverity);
-
-
+        void ChangePriortiy(PriorityType newPriority);
         string Assignee {  get; }
         
     }

@@ -16,6 +16,8 @@ namespace Task_Management.Models.Contracts
         SeverityType Severity { get; }
 
         BugStatusType Status { get; }
+        void ChangeSeverity(SeverityType newSeverity);
+
 
         string Assignee {  get; }
         

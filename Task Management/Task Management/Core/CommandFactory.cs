@@ -59,9 +59,9 @@ namespace Task_Management.Core
                 case CommandType.ChangeBugPriority:
                     throw new NotImplementedException();
                 case CommandType.ChangeBugSeverity:
-                    throw new NotImplementedException();
+                    return new ChangeBugSeverityCommand(commandParameters, repository);
                 case CommandType.ChangeBugStatus:
-                    throw new NotImplementedException();
+                    return new ChangeBugStatusCommand(commandParameters, repository);
                 case CommandType.CreateStory:
                     throw new NotImplementedException();
                 case CommandType.ShowStories:

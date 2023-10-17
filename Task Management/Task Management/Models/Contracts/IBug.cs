@@ -17,7 +17,7 @@ namespace Task_Management.Models.Contracts
 
         BugStatusType Status { get; }
 
-        string Assigne {  get; }
+        string Assignee {  get; }
         
     }
 }

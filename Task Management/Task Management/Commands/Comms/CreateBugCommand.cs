@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +9,10 @@ using Task_Management.Models.Enums;
 
 namespace Task_Management.Commands.Comms
 {
-    public class CreateFeedbackCommand : BaseCommand
+    public class CreateBugCommand : BaseCommand
     {
-        public CreateFeedbackCommand(IList<string> parameters, IRepository repository)
-            : base(parameters, repository)
+        public CreateBugCommand(IList<string> parameters, IRepository repository)
+           : base(parameters, repository)
         {
         }
 
@@ -26,10 +25,10 @@ namespace Task_Management.Commands.Comms
 
             string title = this.CommandParameters[0];
 
-            return CreateFeedback(title);
+            return CreateBug(title);
         }
 
-        private string CreateFeedback(string title)
+        private string CreateBug(string title)
         {
             Console.Write("  Team - ");
             string teamName = Console.ReadLine();
@@ -42,13 +41,18 @@ namespace Task_Management.Commands.Comms
             Console.Write("  Description - ");
             string description = Console.ReadLine();
 
-            Console.Write("  Rating - ");
-            int rating = int.Parse(Console.ReadLine());
+            Console.Write("  Priority - ");
+            string priorityAsString = Console.ReadLine();
+            PriorityType priority = ParsePriorityTypeParameter(priorityAsString, "PriorityType");
 
-            var feedback = this.Repository.CreateFeedback(title, description, rating);
-            board.AddTask(feedback);
+            Console.Write("  Severity - ");
+            string severityAsString = Console.ReadLine();
+            SeverityType severity = ParseSeverityTypeParameter(severityAsString, "SeverityType");
 
-            return $"Feedback {title} with ID {feedback.Id} was created successfully in team {teamName}, board {boardName}!";
+            var bug = this.Repository.CreateBug(title, description, priority, severity);
+            board.AddTask(bug);
+
+            return $"Bug {title} with id {bug.Id} was created successfully in team {teamName}, board {boardName}!";
         }
     }
 }

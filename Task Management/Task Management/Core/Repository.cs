@@ -18,7 +18,7 @@ namespace Task_Management.Core
         private readonly IList<ITeam> teams = new List<ITeam>();
         private readonly IList<ITask> tasks = new List<ITask>();
         private readonly IList<IFeedback> feedbacks = new List<IFeedback>();
-
+        private readonly IList<IBug> bugs = new List<IBug>();
 
         public IList<IMember> Members
         {
@@ -56,6 +56,15 @@ namespace Task_Management.Core
             }
         }
 
+        public IList<IBug> Bugs
+        {
+            get
+            {
+                var bugsCopy = new List<IBug>(bugs);
+                return bugsCopy;
+            }
+        }
+
         public IMember CreateMember(string name)
         {
             return new Member(name);
@@ -78,6 +87,16 @@ namespace Task_Management.Core
             tasks.Add(feedback);
             feedbacks.Add(feedback);
             return feedback;
+        }
+
+        public IBug CreateBug(string title, string description, PriorityType priority, SeverityType severity)
+        {
+            var nextId = tasks.Count;
+            var bug = new Bug(++nextId, title, description, priority, severity);
+
+            tasks.Add(bug);
+            bugs.Add(bug);
+            return bug;
         }
 
         public IComment CreateComment(string content, string author)
@@ -194,6 +213,18 @@ namespace Task_Management.Core
             throw new EntityNotFoundException($"There is no feedback with ID {ID}");
         }
 
-        
+        public IBug GetBug(int ID)
+        {
+            foreach (IBug bug in bugs)
+            {
+                if (bug.Id == ID)
+                {
+                    return bug;
+                }
+            }
+
+            throw new EntityNotFoundException($"There is no bug with ID {ID}");
+        }
+
     }
 }

@@ -53,7 +53,7 @@ namespace Task_Management.Core
                 case CommandType.ShowTeamMembers:
                     return new ShowTeamMembersCommand(commandParameters, repository);
                 case CommandType.CreateBug:
-                    throw new NotImplementedException();
+                    return new CreateBugCommand(commandParameters, repository);
                 case CommandType.ShowBugs:
                     throw new NotImplementedException();
                 case CommandType.ChangeBugPriority:

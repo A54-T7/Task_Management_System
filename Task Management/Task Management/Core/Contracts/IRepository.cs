@@ -14,10 +14,12 @@ namespace Task_Management.Core.Contracts
         IList<ITeam> Teams { get; }
         IList<ITask> Tasks { get; }
         IList<IFeedback> Feedbacks { get; }
+        IList<IBug> Bugs { get; }
         IMember CreateMember(string name);
         ITeam CreateTeam(string name);
         IBoard CreateBoard(string name);
         IFeedback CreateFeedback(string title, string description, int rating);
+        IBug CreateBug(string title, string description, PriorityType priority, SeverityType severity);
         public IComment CreateComment(string content, string author);
         void AddMember(IMember member);
         void AddTeam(ITeam team);
@@ -28,5 +30,6 @@ namespace Task_Management.Core.Contracts
         IBoard GetBoard(string boardName, ITeam team);
         ITask GetTask(int ID);
         IFeedback GetFeedback(int ID);
+        IBug GetBug(int ID);
     }
 }

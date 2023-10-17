@@ -67,7 +67,25 @@ namespace Task_Management.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid vehicle type.");
+            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid feedback status type.");
+        }
+
+        protected PriorityType ParsePriorityTypeParameter(string value, string parameterName)
+        {
+            if (Enum.TryParse(value, true, out PriorityType result))
+            {
+                return result;
+            }
+            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid priority type.");
+        }
+
+        protected SeverityType ParseSeverityTypeParameter(string value, string parameterName)
+        {
+            if (Enum.TryParse(value, true, out SeverityType result))
+            {
+                return result;
+            }
+            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid severity type.");
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Task_Management.Commands.Comms
         public string ChangeSeverity(int taskID, PriorityType newPriority)
         {
             var bug = this.Repository.GetBug(taskID);
-            bug.ChangePriortiy(newPriority);
+            bug.ChangePriority(newPriority);
 
             return $"Changed the priority of bug {bug.Title} with ID {bug.Id} to {newPriority}!";
         }

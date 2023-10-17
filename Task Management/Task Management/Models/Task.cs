@@ -78,6 +78,11 @@ namespace Task_Management.Models
             comments.Add(comment);
         }
 
+        public void AddActivity(string activityMessage)
+        {
+            activityLog.Add(activityMessage);
+        }
+
         public string PrintComments()
         {
             StringBuilder sb = new StringBuilder();

@@ -87,7 +87,7 @@ namespace Task_Management.Core
                 case CommandType.ShowAssignees:
                     throw new NotImplementedException();
                 case CommandType.ListTasks:
-                    throw new NotImplementedException();
+                    return new ListTasksCommand(commandParameters, repository);
                 case CommandType.AddTaskComment:
                     return new AddTaskCommentCommand(commandParameters, repository);
                 default:

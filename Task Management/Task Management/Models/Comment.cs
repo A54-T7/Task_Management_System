@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,14 @@ namespace Task_Management.Models
 {
     public class Comment : IComment
     {
-        private string InvalidAuthorError = "Please specify the comment's author!";
+        //private string InvalidAuthorError = "Please specify the comment's author!";
         private string InvalidContentError = "Please specify the comment's content!";
 
         private const string CommentHeader = "    ----------";
 
+        private const int AuthorMinLength = 5;
+        private const int AuthorMaxLength = 15;
+        private const string AuthorErrorMessage = "Author must be between 5 and 15 characters long!";
 
         private string content;
         private string author;
@@ -46,7 +50,7 @@ namespace Task_Management.Models
             }
             private set
             {
-                Validator.ValidateStringNotNullOrEmpty(value, InvalidAuthorError);
+                Validator.ValidateStringRange(value, AuthorMinLength, AuthorMaxLength, AuthorErrorMessage);
                 author = value;
             }
         }

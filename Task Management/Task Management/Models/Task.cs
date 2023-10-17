@@ -30,6 +30,8 @@ namespace Task_Management.Models
             Id = id;
             Title = title;
             Description = description;
+            comments = new List<IComment>();
+            activityLog = new List<string>();
         }
 
         public int Id { get; }

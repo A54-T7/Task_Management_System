@@ -6,6 +6,7 @@ using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Xml.Linq;
+using Task_Management.Exceptions;
 using Task_Management.Models.Contracts;
 using Task_Management.Models.Enums;
 
@@ -61,6 +62,32 @@ namespace Task_Management.Models
             feedbackInfo.AppendLine($"  Status: {Status}");
 
             return feedbackInfo.ToString().Trim();
+        }
+
+        public override void AdvanceStatus()
+        {
+            if (Status != FeedbackStatusType.Done)
+            {
+                Status++;
+            }
+            else
+            {
+                string errorMessage = $"Feedback {Title} cannot be advanced further than the {Status} status.";
+                throw new InvalidUserInputException(errorMessage);
+            }
+        }
+
+        public override void ReverseStatus()
+        {
+            if (Status != FeedbackStatusType.New)
+            {
+                Status--;
+            }
+            else
+            {
+                string errorMessage = $"Feedback {Title} cannot be reverted more than the {Status} status.";
+                throw new InvalidUserInputException(errorMessage);
+            }
         }
     }
 }

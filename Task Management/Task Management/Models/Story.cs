@@ -86,6 +86,16 @@ namespace Task_Management.Models
             Assigne = newAssigne;
         }
 
+        public override void AdvanceStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ReverseStatus()
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         /* Stories must have an ID, a title, a description, a priority, a size, a status, an assignee, a

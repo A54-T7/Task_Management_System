@@ -94,6 +94,16 @@ namespace Task_Management.Models
             Assigne = newAssigne;
         }
 
+        public override void AdvanceStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ReverseStatus()
+        {
+            throw new NotImplementedException();
+        }
+
 
         //    * Bugs must have an ID, a title, a description, a list of steps to reproduce it, a priority, a
         //            severity, a status, an assignee, a list of comments and a list of changes history.

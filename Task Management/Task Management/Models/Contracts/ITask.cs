@@ -14,6 +14,8 @@ namespace Task_Management.Models.Contracts
         IList<IComment> Comments { get; }
         IList<string> ActivityLog { get; }
         void AddComment(IComment comment);
+        void AdvanceStatus();
+        void ReverseStatus();
 
         //ToDo
 

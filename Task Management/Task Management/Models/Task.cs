@@ -102,5 +102,8 @@ namespace Task_Management.Models
 
             return sb.ToString();
         }
+
+        public abstract void AdvanceStatus();
+        public abstract void ReverseStatus();
     }
 }

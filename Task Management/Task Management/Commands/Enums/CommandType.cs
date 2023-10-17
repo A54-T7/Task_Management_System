@@ -20,7 +20,7 @@ namespace Task_Management.Commands.Enums
         AddTeamMember,
         ShowTeamMembers,
         CreateBug,
-        ShowBugs,
+        ListBugs,
         ChangeBugPriority,
         ChangeBugSeverity,
         ChangeBugStatus,

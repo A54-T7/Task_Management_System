@@ -41,7 +41,6 @@ namespace Task_Management.Commands.Comms
                 case "SortByTitle":
                     taskList = Repository.Tasks.OrderBy(task => task.Title).ToList();
                     break;
-                    
                 case "FilterByTitle":
                     Console.Write("  Filter keyword - ");
                     string wordFilter = Console.ReadLine();

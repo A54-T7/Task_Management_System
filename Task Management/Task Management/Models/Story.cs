@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Task_Management.Exceptions;
 using Task_Management.Models.Contracts;
 using Task_Management.Models.Enums;
 
@@ -10,20 +11,20 @@ namespace Task_Management.Models
 {
     public class Story : Task, IStory
     {
-
         private StoryStatusType status;
         private StorySizeType size;
         private PriorityType priority;
-        private string assigne;
+
+        private string assignee;
 
 
-        public Story(int id, string title, string description, PriorityType priority, StorySizeType size,StoryStatusType status, string assigne) 
+        public Story(int id, string title, string description, PriorityType priority, StorySizeType size) 
             : base(id, title, description)
         {
-            Status = status;
+            Status = StoryStatusType.NotDone;
             Size = size;
             Priority = priority;
-            Assigne = assigne;
+            Assignee = "N/A";
         }
 
         public StoryStatusType Status
@@ -62,15 +63,15 @@ namespace Task_Management.Models
             }
         }
 
-        public string Assigne
+        public string Assignee
         {
             get
             {
-                return assigne;
+                return assignee;
             }
             private set
             {
-                assigne = value;
+                assignee = value;
             }
         }
         public void ChangePriority(PriorityType newPriority)
@@ -81,21 +82,49 @@ namespace Task_Management.Models
         {
             Size = newSize;
         }
-        public void ChangeAssigne(string newAssigne)
+        public void ChangeAssignee(string newAssignee)
         {
-            Assigne = newAssigne;
+            Assignee = newAssignee;
         }
 
         public override void AdvanceStatus()
         {
-            throw new NotImplementedException();
+            if (Status != StoryStatusType.Done)
+            {
+                Status++;
+            }
+            else
+            {
+                string errorMessage = $"Story {Title} cannot be advanced further than the {Status} status.";
+                throw new InvalidUserInputException(errorMessage);
+            }
         }
 
         public override void ReverseStatus()
         {
-            throw new NotImplementedException();
+            if (Status != StoryStatusType.NotDone)
+            {
+                Status--;
+            }
+            else
+            {
+                string errorMessage = $"Story {Title} cannot be reverted more than the {Status} status.";
+                throw new InvalidUserInputException(errorMessage);
+            }
         }
 
+        public override string ToString()
+        {
+            StringBuilder storyInfo = new StringBuilder();
+
+            storyInfo.Append(base.ToString());
+            storyInfo.AppendLine($"  Priority: {Priority}");
+            storyInfo.AppendLine($"  Size: {Size}");
+            storyInfo.AppendLine($"  Status: {Status}");
+            storyInfo.AppendLine($"  Assignee: {Assignee}");
+           
+            return storyInfo.ToString().Trim();
+        }
 
 
         /* Stories must have an ID, a title, a description, a priority, a size, a status, an assignee, a

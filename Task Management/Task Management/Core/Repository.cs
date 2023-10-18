@@ -19,6 +19,7 @@ namespace Task_Management.Core
         private readonly IList<ITask> tasks = new List<ITask>();
         private readonly IList<IFeedback> feedbacks = new List<IFeedback>();
         private readonly IList<IBug> bugs = new List<IBug>();
+        private readonly IList<IStory> stories = new List<IStory>();
 
         public IList<IMember> Members
         {
@@ -65,6 +66,15 @@ namespace Task_Management.Core
             }
         }
 
+        public IList<IStory> Stories
+        {
+            get
+            {
+                var storiesCopy = new List<IStory>(stories);
+                return storiesCopy;
+            }
+        }
+
         public IMember CreateMember(string name)
         {
             return new Member(name);
@@ -86,6 +96,7 @@ namespace Task_Management.Core
 
             tasks.Add(feedback);
             feedbacks.Add(feedback);
+
             return feedback;
         }
 
@@ -96,7 +107,19 @@ namespace Task_Management.Core
 
             tasks.Add(bug);
             bugs.Add(bug);
+
             return bug;
+        }
+
+        public IStory CreateStory(string title, string description, PriorityType priority, StorySizeType size)
+        {
+            var nextId = tasks.Count;
+            var story = new Story(++nextId, title, description, priority, size);
+
+            tasks.Add(story);
+            stories.Add(story);
+
+            return story;
         }
 
         public IComment CreateComment(string content, string author)
@@ -226,5 +249,17 @@ namespace Task_Management.Core
             throw new EntityNotFoundException($"There is no bug with ID {ID}");
         }
 
+        public IStory GetStory(int ID)
+        {
+           foreach (IStory story in stories)
+            {
+                if (story.Id == ID)
+                {
+                    return story;
+                }
+            }
+
+            throw new EntityNotFoundException($"There is no story with ID {ID}");
+        }
     }
 }

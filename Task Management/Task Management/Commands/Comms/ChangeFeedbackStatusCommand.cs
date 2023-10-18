@@ -24,20 +24,14 @@ namespace Task_Management.Commands.Comms
             }
 
             int taskID = this.ParseIntParameter(this.CommandParameters[0], "ID");
-            string memberName = CommandParameters[1];
+            string keyword = CommandParameters[1].ToLower();
 
-            return ChangeStatus(taskID, memberName);
+            return ChangeStatus(taskID, keyword);
         }
 
-        public string ChangeStatus(int taskID, string memberName)
+        public string ChangeStatus(int taskID, string keyword)
         {
             var feedback = this.Repository.GetFeedback(taskID);
-            var member = this.Repository.GetMember(memberName);
-
-            Console.WriteLine($"Feedback {feedback.Title}'s current status is {feedback.Status}");
-            Console.Write("  Advance or Revert? ");
-
-            string keyword = Console.ReadLine().ToLower();
 
             switch (keyword)
             {
@@ -47,6 +41,8 @@ namespace Task_Management.Commands.Comms
                 case "revert":
                     feedback.ReverseStatus();
                     break;
+                default:
+                    throw new InvalidUserInputException("No such command! Use 'Advance' or 'Revert'.");
             }
 
             return $"Changed the status of feedback {feedback.Title} with ID {feedback.Id} to {feedback.Status}!";

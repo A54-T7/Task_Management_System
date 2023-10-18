@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Task_Management.Core.Contracts;
 using Task_Management.Exceptions;
-using Task_Management.Models.Enums;
 
 namespace Task_Management.Commands.Comms
 {
-    public class ChangeBugStatusCommand : BaseCommand
+    public class ChangeStoryStatusCommand : BaseCommand
     {
-        public ChangeBugStatusCommand(List<string> parameters, IRepository repository)
+        public ChangeStoryStatusCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
         }
@@ -31,21 +30,21 @@ namespace Task_Management.Commands.Comms
 
         public string ChangeStatus(int taskID, string keyword)
         {
-            var bug = this.Repository.GetBug(taskID);
+            var story = this.Repository.GetStory(taskID);
 
             switch (keyword)
             {
                 case "advance":
-                    bug.AdvanceStatus();
+                    story.AdvanceStatus();
                     break;
                 case "revert":
-                    bug.ReverseStatus();
+                    story.ReverseStatus();
                     break;
                 default:
                     throw new InvalidUserInputException("No such command! Use 'Advance' or 'Revert'.");
             }
 
-            return $"Changed the status of bug {bug.Title} with ID {bug.Id} to {bug.Status}!";
+            return $"Changed the status of feedback {story.Title} with ID {story.Id} to {story.Status}!";
         }
     }
 }

@@ -9,9 +9,9 @@ using Task_Management.Models.Enums;
 
 namespace Task_Management.Commands.Comms
 {
-    public class ChangeBugPriorityCommand : BaseCommand
+    public class ChangeStoryPriorityCommand : BaseCommand
     {
-        public ChangeBugPriorityCommand(List<string> parameters, IRepository repository)
+        public ChangeStoryPriorityCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
         }
@@ -32,10 +32,10 @@ namespace Task_Management.Commands.Comms
 
         public string ChangePriority(int taskID, PriorityType newPriority)
         {
-            var bug = this.Repository.GetBug(taskID);
-            bug.ChangePriority(newPriority);
+            var story = this.Repository.GetStory(taskID);
+            story.ChangePriority(newPriority);
 
-            return $"Changed the priority of bug {bug.Title} with ID {bug.Id} to {newPriority}!";
+            return $"Changed the priority of story {story.Title} with ID {story.Id} to {newPriority}!";
         }
     }
 }

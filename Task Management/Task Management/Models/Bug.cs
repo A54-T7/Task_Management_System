@@ -17,7 +17,7 @@ namespace Task_Management.Models
 
         private string assignee;
 
-        private List<string> steps = new List<string>();
+        private List<string> stepsToReproduce = new List<string>();
 
         public Bug(int id, string title, string description, PriorityType priority, SeverityType severity) 
             : base(id, title, description)
@@ -28,11 +28,11 @@ namespace Task_Management.Models
             Assignee = "N/A";
         }
 
-        public IList<string> Steps
+        public IList<string> StepsToReproduce
         {
             get
             {
-                return new List<string>(steps);
+                return new List<string>(stepsToReproduce);
             }
         }
 
@@ -91,9 +91,9 @@ namespace Task_Management.Models
         {
             Severity = newSeverity;
         }
-        public void ChangeAssigne(string newAssigne)
+        public void ChangeAssignee(string newAssignee)
         {
-            Assignee = newAssigne;
+            Assignee = newAssignee;
         }
 
         public override void AdvanceStatus()
@@ -135,7 +135,7 @@ namespace Task_Management.Models
             bugInfo.AppendLine($"  Reproduction steps:");
             int counter = 1;
 
-            foreach (var step in steps)
+            foreach (var step in stepsToReproduce)
             {
                 bugInfo.AppendLine($"   {counter}. {step}");
             }

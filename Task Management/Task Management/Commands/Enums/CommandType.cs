@@ -25,7 +25,7 @@ namespace Task_Management.Commands.Enums
         ChangeBugSeverity,
         ChangeBugStatus,
         CreateStory,
-        ShowStories,
+        ListStories,
         ChangeStoryPriority,
         ChangeStorySize,
         ChangeStoryStatus,

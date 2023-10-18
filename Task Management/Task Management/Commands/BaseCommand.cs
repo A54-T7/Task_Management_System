@@ -87,5 +87,23 @@ namespace Task_Management.Commands
             }
             throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid severity type.");
         }
+
+        protected StorySizeType ParseStorySizeTypeParameter(string value, string parameterName)
+        {
+            if (Enum.TryParse(value, true, out StorySizeType result))
+            {
+                return result;
+            }
+            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid size type.");
+        }
+
+        protected StoryStatusType ParseStoryStatusTypeParameter(string value, string parameterName)
+        {
+            if (Enum.TryParse(value, true, out StoryStatusType result))
+            {
+                return result;
+            }
+            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid story status type.");
+        }
     }
 }

@@ -9,10 +9,10 @@ using Task_Management.Models.Enums;
 
 namespace Task_Management.Commands.Comms
 {
-    public class CreateBugCommand : BaseCommand
+    internal class CreateStoryCommand : BaseCommand
     {
-        public CreateBugCommand(IList<string> parameters, IRepository repository)
-           : base(parameters, repository)
+        public CreateStoryCommand(IList<string> parameters, IRepository repository)
+            : base(parameters, repository)
         {
         }
 
@@ -45,14 +45,14 @@ namespace Task_Management.Commands.Comms
             string priorityAsString = Console.ReadLine();
             PriorityType priority = ParsePriorityTypeParameter(priorityAsString, "PriorityType");
 
-            Console.Write("  Severity - ");
-            string severityAsString = Console.ReadLine();
-            SeverityType severity = ParseSeverityTypeParameter(severityAsString, "SeverityType");
+            Console.Write("  Size - ");
+            string sizeAsString = Console.ReadLine();
+            StorySizeType size = ParseStorySizeTypeParameter(sizeAsString, "SeverityType");
 
-            var bug = this.Repository.CreateBug(title, description, priority, severity);
-            board.AddTask(bug);
+            var story = this.Repository.CreateStory(title, description, priority, size);
+            board.AddTask(story);
 
-            return $"Bug {title} with ID {bug.Id} was created successfully in team {teamName}, board {boardName}!";
+            return $"Story {title} with ID {story.Id} was created successfully in team {teamName}, board {boardName}!";
         }
     }
 }

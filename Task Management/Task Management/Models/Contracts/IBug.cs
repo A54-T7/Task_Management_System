@@ -9,7 +9,7 @@ namespace Task_Management.Models.Contracts
 {
     public interface IBug : ITask
     {
-        IList<string> Steps { get; }
+        IList<string> StepsToReproduce { get; }
 
         PriorityType Priority { get; }
 

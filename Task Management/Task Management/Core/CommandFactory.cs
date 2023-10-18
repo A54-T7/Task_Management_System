@@ -63,15 +63,15 @@ namespace Task_Management.Core
                 case CommandType.ChangeBugStatus:
                     return new ChangeBugStatusCommand(commandParameters, repository);
                 case CommandType.CreateStory:
-                    throw new NotImplementedException();
-                case CommandType.ShowStories:
-                    throw new NotImplementedException();
+                    return new CreateStoryCommand(commandParameters, repository);
+                case CommandType.ListStories:
+                    return new ListStoriesCommand(commandParameters, repository);
                 case CommandType.ChangeStoryPriority:
-                    throw new NotImplementedException();
+                    return new ChangeStoryPriorityCommand(commandParameters, repository);
                 case CommandType.ChangeStorySize:
-                    throw new NotImplementedException();
+                    return new ChangeStorySizeCommand(commandParameters, repository);
                 case CommandType.ChangeStoryStatus:
-                    throw new NotImplementedException();
+                    return new ChangeStoryStatusCommand(commandParameters, repository);
                 case CommandType.CreateFeedback:
                     return new CreateFeedbackCommand(commandParameters, repository);
                 case CommandType.ListFeedback:

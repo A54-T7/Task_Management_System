@@ -14,7 +14,8 @@ namespace Task_Management.Models.Contracts
         StorySizeType Size { get; }
 
         PriorityType Priority { get; }
-        string Assigne { get; }
-        
+        string Assignee { get; }
+        void ChangePriority(PriorityType newPriority);
+        void ChangeSize(StorySizeType newSize);
     }
 }

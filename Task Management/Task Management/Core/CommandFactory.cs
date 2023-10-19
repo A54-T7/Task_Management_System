@@ -81,7 +81,7 @@ namespace Task_Management.Core
                 case CommandType.ChangeFeedbackStatus:
                     return new ChangeFeedbackStatusCommand(commandParameters, repository);
                 case CommandType.AssignTask:
-                    throw new NotImplementedException();
+                    return new AssignTaskCommand(commandParameters, repository);
                 case CommandType.UnassignTask:
                     throw new NotImplementedException();
                 case CommandType.ShowAssignees:

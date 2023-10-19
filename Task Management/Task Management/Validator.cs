@@ -24,5 +24,13 @@ namespace Task_Management
                 throw new InvalidUserInputException(message);
             }
         }
+
+        public static void ValidateRatingNotNegative(int value, string message)
+        {
+            if (value <= 0)
+            {
+                throw new InvalidUserInputException(message);
+            }
+        }
     }
 }

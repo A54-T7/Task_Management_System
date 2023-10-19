@@ -122,7 +122,10 @@ namespace Task_Management.Models
             storyInfo.AppendLine($"  Size: {Size}");
             storyInfo.AppendLine($"  Status: {Status}");
             storyInfo.AppendLine($"  Assignee: {Assignee}");
-           
+
+            storyInfo.AppendLine($"  Comments:");
+            storyInfo.AppendLine(base.PrintComments());
+
             return storyInfo.ToString().Trim();
         }
 

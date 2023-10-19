@@ -141,6 +141,9 @@ namespace Task_Management.Models
             bugInfo.AppendLine($"  Reproduction steps:");
             bugInfo.AppendLine(PrintReproductionSteps());
 
+            bugInfo.AppendLine($"  Comments:");
+            bugInfo.AppendLine(base.PrintComments());
+
             return bugInfo.ToString().Trim();
         }
 
@@ -151,17 +154,17 @@ namespace Task_Management.Models
 
             if (StepsToReproduce.Count <= 0)
             {
-                sb.AppendLine("    - None -");
+                sb.AppendLine("   - None -");
             }
             else
             {
                 foreach (var step in StepsToReproduce)
                 {
-                    sb.AppendLine($"    {counter}. {step}");
+                    sb.AppendLine($"   {counter++}. {step}");
                 }
             }
 
-            return sb.ToString();
+            return sb.ToString().TrimEnd();
         }
 
 

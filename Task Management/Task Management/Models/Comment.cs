@@ -22,10 +22,10 @@ namespace Task_Management.Models
         private string content;
         private string author;
 
-        public Comment(string author, string content)
+        public Comment(string content, string author)
         {
-            Author = author;
             Content = content;
+            Author = author;
         }
 
 

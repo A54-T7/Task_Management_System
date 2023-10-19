@@ -14,6 +14,8 @@ namespace Task_Management.Models
 {
     public class Feedback : Task, IFeedback
     {
+        private const string RatingErrorMessage = "Feedback rating must be a positive number!";
+
         private int rating;
         private FeedbackStatusType status;
 
@@ -32,6 +34,7 @@ namespace Task_Management.Models
             }
             private set
             {
+                Validator.ValidateRatingNotNegative(value, RatingErrorMessage);
                 rating = value;
             }
         }
@@ -51,17 +54,6 @@ namespace Task_Management.Models
         public void ChangeRating(int newRating)
         {
             Rating = newRating;
-        }
-
-        public override string ToString()
-        {
-            StringBuilder feedbackInfo = new StringBuilder();
-
-            feedbackInfo.Append(base.ToString());
-            feedbackInfo.AppendLine($"  Rating: {Rating}");
-            feedbackInfo.AppendLine($"  Status: {Status}");
-
-            return feedbackInfo.ToString().Trim();
         }
 
         public override void AdvanceStatus()
@@ -88,6 +80,20 @@ namespace Task_Management.Models
                 string errorMessage = $"Feedback {Title} cannot be reverted more than the {Status} status.";
                 throw new InvalidUserInputException(errorMessage);
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder feedbackInfo = new StringBuilder();
+
+            feedbackInfo.Append(base.ToString());
+            feedbackInfo.AppendLine($"  Rating: {Rating}");
+            feedbackInfo.AppendLine($"  Status: {Status}");
+
+            feedbackInfo.AppendLine($"  Comments:");
+            feedbackInfo.AppendLine(base.PrintComments());
+
+            return feedbackInfo.ToString().Trim();
         }
     }
 }

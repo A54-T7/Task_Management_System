@@ -19,19 +19,21 @@ namespace Task_Management.Commands.Comms
 
         protected override string ExecuteCommand()
         {
-            if (this.CommandParameters.Count != 2)
+            if (this.CommandParameters.Count != 1)
             {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2, Received: {this.CommandParameters.Count}");
+                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 1, Received: {this.CommandParameters.Count}");
             }
 
             string boardName = this.CommandParameters[0];
-            string teamName = this.CommandParameters[1];
 
-            return this.AddBoard(boardName, teamName);
+            return this.AddBoard(boardName);
         }
 
-        private string AddBoard(string boardName, string teamName)
+        private string AddBoard(string boardName)
         {
+            Console.Write("  Team - ");
+            string teamName = Console.ReadLine();
+
             ITeam team = this.Repository.GetTeam(teamName);
             IBoard board = this.Repository.CreateBoard(boardName);
 

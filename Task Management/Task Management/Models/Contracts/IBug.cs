@@ -18,6 +18,7 @@ namespace Task_Management.Models.Contracts
         BugStatusType Status { get; }
         void ChangeSeverity(SeverityType newSeverity);
         void ChangePriority(PriorityType newPriority);
+        void AddReproduceStep(string newStep);
         string Assignee {  get; }
         
     }

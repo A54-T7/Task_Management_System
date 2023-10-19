@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Task_Management.Exceptions;
 using Task_Management.Models.Contracts;
 using Task_Management.Models.Enums;
@@ -122,6 +123,11 @@ namespace Task_Management.Models
             }
         }
 
+        public void AddReproduceStep(string newStep)
+        {
+            stepsToReproduce.Add(newStep);
+        }
+
         public override string ToString()
         {
             StringBuilder bugInfo = new StringBuilder();
@@ -133,14 +139,29 @@ namespace Task_Management.Models
             bugInfo.AppendLine($"  Assignee: {Assignee}");
 
             bugInfo.AppendLine($"  Reproduction steps:");
-            int counter = 1;
-
-            foreach (var step in stepsToReproduce)
-            {
-                bugInfo.AppendLine($"   {counter}. {step}");
-            }
+            bugInfo.AppendLine(PrintReproductionSteps());
 
             return bugInfo.ToString().Trim();
+        }
+
+        public string PrintReproductionSteps()
+        {
+            StringBuilder sb = new StringBuilder();
+            int counter = 1;
+
+            if (StepsToReproduce.Count <= 0)
+            {
+                sb.AppendLine("    - None -");
+            }
+            else
+            {
+                foreach (var step in StepsToReproduce)
+                {
+                    sb.AppendLine($"    {counter}. {step}");
+                }
+            }
+
+            return sb.ToString();
         }
 
 

@@ -88,6 +88,18 @@ namespace Task_Management.Models
             activityLog.Add(activityMessage);
         }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            //sb.AppendLine($"Task: {GetType().Name}");
+            //sb.AppendLine($"  Title: {Title}");
+            sb.AppendLine($"{GetType().Name}: {Title}");
+            sb.AppendLine($"  Description: {Description}");
+
+            return sb.ToString();
+        }
+
         public string PrintComments()
         {
             StringBuilder sb = new StringBuilder();
@@ -109,17 +121,6 @@ namespace Task_Management.Models
             }
 
             return sb.ToString().TrimEnd();
-        }
-
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine($"Task: {GetType().Name}");
-            sb.AppendLine($"  Title: {Title}");
-            sb.AppendLine($"  Description: {Description}");
-
-            return sb.ToString();
         }
 
         public abstract void AdvanceStatus();

@@ -33,10 +33,11 @@ namespace Task_Management.Commands.Enums
         ListFeedback,
         ChangeFeedbackRating,
         ChangeFeedbackStatus,
-        AssignPerson,
-        UnassingPerson,
+        AssignTask,
+        UnassignTask,
         ShowAssignees,
         ListTasks,
-        AddTaskComment
+        AddTaskComment,
+        AddBugReproductionSteps
     }
 }

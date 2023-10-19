@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Task_Management.Core.Contracts;
 using Task_Management.Exceptions;
-using Task_Management.Models.Contracts;
 
 namespace Task_Management.Commands.Comms
 {
-    public class AssignTaskCommand : BaseCommand
+    public class UnassignTaskCommand : BaseCommand
     {
-        public AssignTaskCommand(List<string> parameters, IRepository repository)
+        public UnassignTaskCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
         }
@@ -19,41 +18,42 @@ namespace Task_Management.Commands.Comms
 
         protected override string ExecuteCommand()
         {
-            if (this.CommandParameters.Count != 2)
+            if (this.CommandParameters.Count != 1)
             {
-                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 2, Received: {this.CommandParameters.Count}");
+                throw new InvalidUserInputException($"Invalid number of arguments. Expected: 1, Received: {this.CommandParameters.Count}");
             }
 
             int taskID = this.ParseIntParameter(this.CommandParameters[0], "ID");
-            string assigneeName = CommandParameters[1];
 
-            return AssignTask(taskID, assigneeName);
+            return UnassignTask(taskID);
         }
 
-        public string AssignTask(int taskID, string assigneeName)
+        
+        public string UnassignTask(int taskID)
         {
             var task = this.Repository.GetTask(taskID);
-            var assignee = this.Repository.GetMember(assigneeName);
-
             string taskAsString = task.GetType().ToString().Split('.')[2];
+
+            string assigneeName = "";
 
             switch (taskAsString)
             {
                 case "Bug":
                     var bug = this.Repository.GetBug(taskID);
-                    bug.AddAssignee(assignee);
+                    assigneeName = bug.Assignee.Name;
+                    bug.RemoveAssignee();
                     break;
                 case "Story":
                     var story = this.Repository.GetStory(taskID);
-                    story.AddAssignee(assignee);
+                    assigneeName = story.Assignee.Name;
+                    story.RemoveAssignee();
                     break;
                 case "Feedback":
-                    string errorMessage = "Feedback tasks are not assignable!";
+                    string errorMessage = "Feedback tasks are not assignable, and therefore cannot be unassigned!";
                     throw new InvalidUserInputException(errorMessage);
             }
 
-            return $"Member {assignee.Name} successfully assigned to {taskAsString} with ID {task.Id}";
+            return $"Member {assigneeName} successfully unassigned from {taskAsString} with ID {task.Id}";
         }
-
     }
 }

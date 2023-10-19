@@ -10,16 +10,15 @@ namespace Task_Management.Models.Contracts
     public interface IBug : ITask
     {
         IList<string> StepsToReproduce { get; }
-
         PriorityType Priority { get; }
-
         SeverityType Severity { get; }
-
         BugStatusType Status { get; }
+        IMember Assignee { get; }
         void ChangeSeverity(SeverityType newSeverity);
         void ChangePriority(PriorityType newPriority);
         void AddReproduceStep(string newStep);
-        string Assignee {  get; }
-        
+        void AddAssignee(IMember newAssignee);
+        void RemoveAssignee();
+
     }
 }

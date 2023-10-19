@@ -10,12 +10,12 @@ namespace Task_Management.Models.Contracts
     public interface IStory : ITask
     {
         StoryStatusType Status { get; }
-
         StorySizeType Size { get; }
-
         PriorityType Priority { get; }
-        string Assignee { get; }
+        IMember Assignee { get; }
         void ChangePriority(PriorityType newPriority);
         void ChangeSize(StorySizeType newSize);
+        void AddAssignee(IMember newAssignee);
+        void RemoveAssignee();
     }
 }

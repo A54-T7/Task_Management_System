@@ -83,7 +83,7 @@ namespace Task_Management.Core
                 case CommandType.AssignTask:
                     return new AssignTaskCommand(commandParameters, repository);
                 case CommandType.UnassignTask:
-                    throw new NotImplementedException();
+                    return new UnassignTaskCommand(commandParameters, repository);
                 case CommandType.ShowAssignees:
                     throw new NotImplementedException();
                 case CommandType.ListTasks:

@@ -15,7 +15,7 @@ namespace Task_Management.Models
         private StorySizeType size;
         private PriorityType priority;
 
-        private string assignee;
+        private IMember assignee;
 
 
         public Story(int id, string title, string description, PriorityType priority, StorySizeType size) 
@@ -24,7 +24,6 @@ namespace Task_Management.Models
             Status = StoryStatusType.NotDone;
             Size = size;
             Priority = priority;
-            Assignee = "N/A";
         }
 
         public StoryStatusType Status
@@ -63,7 +62,7 @@ namespace Task_Management.Models
             }
         }
 
-        public string Assignee
+        public IMember Assignee
         {
             get
             {
@@ -82,9 +81,22 @@ namespace Task_Management.Models
         {
             Size = newSize;
         }
-        public void ChangeAssignee(string newAssignee)
+
+        public void AddAssignee(IMember newAssignee)
         {
             Assignee = newAssignee;
+        }
+        public void RemoveAssignee()
+        {
+            if (Assignee == null)
+            {
+                string errorMessage = $"Task {Title} is already unassigned!";
+                throw new InvalidUserInputException(errorMessage);
+            }
+            else
+            {
+                Assignee = null;
+            }
         }
 
         public override void AdvanceStatus()
@@ -121,7 +133,9 @@ namespace Task_Management.Models
             storyInfo.AppendLine($"  Priority: {Priority}");
             storyInfo.AppendLine($"  Size: {Size}");
             storyInfo.AppendLine($"  Status: {Status}");
-            storyInfo.AppendLine($"  Assignee: {Assignee}");
+
+            string assigneeAsString = (Assignee != null) ? Assignee.Name : "N/A";
+            storyInfo.AppendLine($"  Assignee: {assigneeAsString}");
 
             storyInfo.AppendLine($"  Comments:");
             storyInfo.AppendLine(base.PrintComments());

@@ -16,7 +16,7 @@ namespace Task_Management.Models
         private SeverityType severity;
         private BugStatusType status;
 
-        private string assignee;
+        private IMember assignee;
 
         private List<string> stepsToReproduce = new List<string>();
 
@@ -26,7 +26,6 @@ namespace Task_Management.Models
             Priority = priority;
             Severity = severity;
             Status = BugStatusType.Active;
-            Assignee = "N/A";
         }
 
         public IList<string> StepsToReproduce
@@ -73,7 +72,8 @@ namespace Task_Management.Models
             }
         }
 
-        public string Assignee
+        
+        public IMember Assignee
         {
             get
             {
@@ -84,6 +84,8 @@ namespace Task_Management.Models
                 assignee = value;
             }
         }
+
+
         public void ChangePriority(PriorityType newPriority)
         {
             Priority = newPriority;
@@ -92,9 +94,22 @@ namespace Task_Management.Models
         {
             Severity = newSeverity;
         }
-        public void ChangeAssignee(string newAssignee)
+        public void AddAssignee(IMember newAssignee)
         {
             Assignee = newAssignee;
+        }
+
+        public void RemoveAssignee()
+        {
+            if (Assignee == null)
+            {
+                string errorMessage = $"Bug {Title} is already unassigned!";
+                throw new InvalidUserInputException(errorMessage);
+            }
+            else
+            {
+                Assignee = null;
+            }
         }
 
         public override void AdvanceStatus()
@@ -136,7 +151,9 @@ namespace Task_Management.Models
             bugInfo.AppendLine($"  Priority: {Priority}");
             bugInfo.AppendLine($"  Severity: {Severity}");
             bugInfo.AppendLine($"  Status: {Status}");
-            bugInfo.AppendLine($"  Assignee: {Assignee}");
+
+            string assigneeAsString = (Assignee != null) ? Assignee.Name : "N/A";
+            bugInfo.AppendLine($"  Assignee: {assigneeAsString}");
 
             bugInfo.AppendLine($"  Reproduction steps:");
             bugInfo.AppendLine(PrintReproductionSteps());

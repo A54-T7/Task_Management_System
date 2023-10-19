@@ -54,12 +54,27 @@ namespace Task_Management.Models
 
         public void AddActivity(string message)
         {
-            activityLog.Add($"{message} - [{DateTime.Now.ToString("yyyy-MM-dd|HH:mm:ss")}]");
+            activityLog.Add($"{message} [{DateTime.Now.ToString("yyyy-MM-dd|HH:mm:ss")}]");
         }
         public void AddTask(ITask task)
         {
             tasks.Add(task);
         }
-        //Add ActivityHistory
+
+        public string PrintActivity()
+        {
+            StringBuilder sb = new StringBuilder();
+            int counter = 1;
+
+            sb.AppendLine("Board Activity Log:");
+
+            foreach (var activity in ActivityLog)
+            {
+                sb.AppendLine($"{counter}. {activity}");
+                counter++;
+            }
+
+            return sb.ToString().Trim();
+        }
     }
 }

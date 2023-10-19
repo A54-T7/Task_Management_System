@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Task_Management.Core.Contracts;
 using Task_Management.Exceptions;
+using Task_Management.Models;
 using Task_Management.Models.Enums;
 
 namespace Task_Management.Commands.Comms
@@ -51,6 +52,8 @@ namespace Task_Management.Commands.Comms
 
             var story = this.Repository.CreateStory(title, description, priority, size);
             board.AddTask(story);
+
+            board.AddActivity($"Added story {story.Title} with ID {story.Id}.");
 
             return $"Story {title} with ID {story.Id} was created successfully in team {teamName}, board {boardName}!";
         }

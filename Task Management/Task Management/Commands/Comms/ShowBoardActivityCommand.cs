@@ -8,9 +8,9 @@ using Task_Management.Exceptions;
 
 namespace Task_Management.Commands.Comms
 {
-    public class ShowBoardActivtyCommand : BaseCommand
+    public class ShowBoardActivityCommand : BaseCommand
     {
-        public ShowBoardActivtyCommand(List<string> parameters, IRepository repository)
+        public ShowBoardActivityCommand(List<string> parameters, IRepository repository)
             : base(parameters, repository)
         {
         }
@@ -31,20 +31,9 @@ namespace Task_Management.Commands.Comms
         private string ShowBoardActivity(string boardName, string teamName)
         {
             var team = this.Repository.GetTeam(teamName);
-
-            StringBuilder sb = new StringBuilder();
-            int counter = 1;
-
-            sb.AppendLine("--BOARD ACTIVITY LOG--");
-
             var board = this.Repository.GetBoard(boardName, team);
-            foreach (var activity in board.ActivityLog)
-            {
-                sb.AppendLine($"{counter}. {activity}");
-                counter++;
-            }
 
-            return sb.ToString().Trim();
+            return board.PrintActivity();
         }
     }
 }

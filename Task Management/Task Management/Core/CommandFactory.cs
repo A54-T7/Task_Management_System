@@ -41,7 +41,7 @@ namespace Task_Management.Core
                 case CommandType.ShowBoards:
                     return new ShowBoardsCommand(commandParameters, repository);
                 case CommandType.ShowBoardActivity:
-                    return new ShowBoardActivtyCommand(commandParameters, repository);
+                    return new ShowBoardActivityCommand(commandParameters, repository);
                 case CommandType.CreateTeam:
                     return new CreateTeamCommand(commandParameters, repository);
                 case CommandType.ShowTeams:

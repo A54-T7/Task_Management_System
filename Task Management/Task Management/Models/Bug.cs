@@ -26,6 +26,7 @@ namespace Task_Management.Models
             Priority = priority;
             Severity = severity;
             Status = BugStatusType.Active;
+            base.AddActivity($"Created bug '{Title}' with ID {Id}");
         }
 
         public IList<string> StepsToReproduce
@@ -84,7 +85,6 @@ namespace Task_Management.Models
                 assignee = value;
             }
         }
-
 
         public void ChangePriority(PriorityType newPriority)
         {

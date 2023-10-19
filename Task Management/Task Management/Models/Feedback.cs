@@ -24,6 +24,7 @@ namespace Task_Management.Models
         {
             Rating = rating;
             Status = FeedbackStatusType.New;
+            base.AddActivity($"Created feedback {base.Title} with ID {base.Id}");
         }
 
         public int Rating

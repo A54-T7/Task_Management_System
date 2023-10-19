@@ -52,6 +52,8 @@ namespace Task_Management.Commands.Comms
             var bug = this.Repository.CreateBug(title, description, priority, severity);
             board.AddTask(bug);
 
+            board.AddActivity($"Added bug {bug.Title} with ID {bug.Id}.");
+
             return $"Bug {title} with ID {bug.Id} was created successfully in team {teamName}, board {boardName}!";
         }
     }

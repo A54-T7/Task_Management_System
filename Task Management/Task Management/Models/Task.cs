@@ -82,7 +82,7 @@ namespace Task_Management.Models
 
         public void AddActivity(string activityMessage)
         {
-            activityLog.Add(activityMessage);
+            activityLog.Add($"{activityMessage} - [{DateTime.Now.ToString("yyyy-MM-dd|HH:mm:ss")}]");
         }
 
         public override string ToString()

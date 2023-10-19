@@ -13,5 +13,6 @@ namespace Task_Management.Models.Contracts
         IList<string> ActivityLog { get; }
         void AddActivity(string message);
         void AddTask(ITask task);
+        string PrintActivity();
     }
 }

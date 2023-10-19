@@ -46,6 +46,8 @@ namespace Task_Management.Commands.Comms
             var newComment = this.Repository.CreateComment(content, author);
             task.AddComment(newComment);
 
+            member.AddActivity($"Added comment to task {task.Title} with ID {task.Id}");
+
             return $"{member.Name} added a new comment to {task.GetType().ToString().Split('.')[2]} {task.Title} successfully!";
         }
     }

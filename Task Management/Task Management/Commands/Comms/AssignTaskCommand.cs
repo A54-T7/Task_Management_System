@@ -42,10 +42,12 @@ namespace Task_Management.Commands.Comms
                 case "Bug":
                     var bug = this.Repository.GetBug(taskID);
                     bug.AddAssignee(assignee);
+                    assignee.AddTask(bug);
                     break;
                 case "Story":
                     var story = this.Repository.GetStory(taskID);
                     story.AddAssignee(assignee);
+                    assignee.AddTask(story);
                     break;
                 case "Feedback":
                     string errorMessage = "Feedback tasks are not assignable!";

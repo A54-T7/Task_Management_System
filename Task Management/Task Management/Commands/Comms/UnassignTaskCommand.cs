@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Task_Management.Core.Contracts;
 using Task_Management.Exceptions;
+using Task_Management.Models.Contracts;
 
 namespace Task_Management.Commands.Comms
 {
@@ -34,26 +35,28 @@ namespace Task_Management.Commands.Comms
             var task = this.Repository.GetTask(taskID);
             string taskAsString = task.GetType().ToString().Split('.')[2];
 
-            string assigneeName = "";
+            IMember assignee;
 
             switch (taskAsString)
             {
                 case "Bug":
                     var bug = this.Repository.GetBug(taskID);
-                    assigneeName = bug.Assignee.Name;
+                    assignee = this.Repository.GetMember(bug.Assignee.Name);
+                    assignee.RemoveTask(bug);
                     bug.RemoveAssignee();
                     break;
                 case "Story":
                     var story = this.Repository.GetStory(taskID);
-                    assigneeName = story.Assignee.Name;
+                    assignee = this.Repository.GetMember(story.Assignee.Name);
+                    assignee.RemoveTask(story);
                     story.RemoveAssignee();
                     break;
-                case "Feedback":
+                default:
                     string errorMessage = "Feedback tasks are not assignable, and therefore cannot be unassigned!";
                     throw new InvalidUserInputException(errorMessage);
             }
 
-            return $"Member {assigneeName} successfully unassigned from {taskAsString} with ID {task.Id}";
+            return $"Member {assignee.Name} successfully unassigned from {taskAsString} with ID {task.Id}";
         }
     }
 }

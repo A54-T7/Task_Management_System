@@ -56,6 +56,64 @@ namespace Task_Management.Models
         {
             activityLog.Add($"{message} - [{DateTime.Now.ToString("yyyy-MM-dd|HH:mm:ss")}]");
         }
-        //Add ActivityHistory
+
+        public void AddTask(ITask task)
+        {
+            tasks.Add(task);
+            AddActivity($"Assigned to task {task.Title} with ID {task.Id}");
+        }
+
+        public void RemoveTask(ITask task)
+        {
+            tasks.Remove(task);
+            AddActivity($"Unassigned from task {task.Title} with ID {task.Id}");
+
+        }
+
+        public override string ToString()
+        {
+            StringBuilder memberInfo = new StringBuilder();
+
+            memberInfo.AppendLine($"{Name}");
+            memberInfo.AppendLine($"Tasks:");
+            memberInfo.AppendLine(PrintTasks());
+
+            return memberInfo.ToString().Trim();
+
+        }
+
+        public string PrintTasks()
+        {
+            StringBuilder sb = new StringBuilder();
+            int counter = 1;
+
+            if (tasks.Count == 0)
+            {
+                sb.AppendLine("    No assigned tasks!");
+            }
+            else
+            {
+                foreach (var task in tasks)
+                {
+                    sb.AppendLine($"    {counter++}. {task.ToString()}");
+                }
+            }
+
+            return sb.ToString().Trim();
+        }
+
+        public string PrintActivityLog()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("    Activities:");
+            foreach (var activity in activityLog)
+            {
+                sb.AppendLine($"    {activity}");
+            }
+
+            return sb.ToString();
+        }
+
     }
 }

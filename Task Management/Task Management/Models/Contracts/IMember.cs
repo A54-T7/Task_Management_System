@@ -13,6 +13,9 @@ namespace Task_Management.Models.Contracts
         IList<ITask> Tasks { get; }
         IList<string> ActivityLog { get; }
         void AddActivity(string message);
+        public void AddTask(ITask task);
+        public void RemoveTask(ITask task);
+
 
 
 

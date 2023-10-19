@@ -92,6 +92,8 @@ namespace Task_Management.Core
                     return new AddTaskCommentCommand(commandParameters, repository);
                 case CommandType.AddBugReproductionSteps:
                     return new AddBugReproductionStepsCommand(commandParameters, repository);
+                case CommandType.ListAssignedTasks:
+                    return new ListAssignedTasksCommand(commandParameters, repository);
                 default:
                     throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
             }

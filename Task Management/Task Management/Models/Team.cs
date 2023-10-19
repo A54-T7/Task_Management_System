@@ -93,7 +93,7 @@ namespace Task_Management.Models
             {
                 foreach (var member in members)
                 {
-                    sb.AppendLine($"{counter}. {member.Name}");
+                    sb.AppendLine($"{counter}. {member.ToString()}");
                     counter++;
                 }
             }

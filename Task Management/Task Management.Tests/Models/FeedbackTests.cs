@@ -30,7 +30,7 @@ namespace Task_Management.Tests.Models
         }
 
         [TestMethod]
-        public void Construct_Should_Throw_Exemption_When_Title_Is_ToShort()
+        public void Construct_Should_Throw_Exception_When_Title_Is_ToShort()
         {
             //Arrange
             int id = 10;
@@ -44,7 +44,7 @@ namespace Task_Management.Tests.Models
         }
 
         [TestMethod]
-        public void Construct_Should_Throw_Exemption_When_Title_Is_ToLong()
+        public void Construct_Should_Throw_Exception_When_Title_Is_ToLong()
         {
             //Arrange
             int id = 10;
@@ -57,7 +57,7 @@ namespace Task_Management.Tests.Models
             Assert.ThrowsException<InvalidUserInputException>(() => new Feedback(id, title, description, rating));
         }
         [TestMethod]
-        public void Construct_Should_Throw_Exemption_When_Description_Is_ToShort()
+        public void Construct_Should_Throw_Exception_When_Description_Is_ToShort()
         {
             //Arrange
             int id = 10;
@@ -70,7 +70,7 @@ namespace Task_Management.Tests.Models
             Assert.ThrowsException<InvalidUserInputException>(() => new Feedback(id, title, description, rating));
         }
         [TestMethod]
-        public void Construct_Should_Throw_Exemption_When_Description_Is_ToLong()
+        public void Construct_Should_Throw_Exception_When_Description_Is_ToLong()
         {
             //Arrange
             int id = 10;
@@ -92,7 +92,7 @@ namespace Task_Management.Tests.Models
             int rating = 5;
 
             Feedback feedback = new Feedback(id, title, description, rating);
-            Comment comment = new Comment("aaaaa", "a");
+            Comment comment = new Comment("aaaaa", "aaaaaa");
 
             //Act
             feedback.AddComment(comment);

@@ -11,13 +11,17 @@ namespace Task_Management.Models
     public class Comment : IComment
     {
         //private string InvalidAuthorError = "Please specify the comment's author!";
-        private string InvalidContentError = "Please specify the comment's content!";
+        //private string InvalidContentError = "Please specify the comment's content!";
 
         private const string CommentHeader = "    ----------";
 
         private const int AuthorMinLength = 5;
         private const int AuthorMaxLength = 15;
         private const string AuthorErrorMessage = "Author must be between 5 and 15 characters long!";
+
+        private const int ContentMinLength = 1;
+        private const int ContentMaxLength = 10000;
+        private const string ContentErrorMessage = "Content could be in range between 1 and 10000 character!";
 
         private string content;
         private string author;
@@ -37,7 +41,7 @@ namespace Task_Management.Models
             }
             private set
             {
-                Validator.ValidateStringNotNullOrEmpty(value, InvalidContentError);
+                Validator.ValidateStringRange(value, ContentMinLength, ContentMaxLength, ContentErrorMessage);
                 content = value;
             }
         }

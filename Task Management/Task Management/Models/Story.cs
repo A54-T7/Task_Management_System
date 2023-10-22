@@ -75,19 +75,33 @@ namespace Task_Management.Models
         }
         public void ChangePriority(PriorityType newPriority)
         {
-            AddActivity($"Changed the priority from {Priority} to {newPriority}");
-            Priority = newPriority;
+            if (newPriority != Priority)
+            {
+                AddActivity($"Changed the priority from {Priority} to {newPriority}");
+                Priority = newPriority;
+            }
+            else throw new InvalidUserInputException($"Priority is already set at {Priority}");
+
         }
         public void ChangeSize(StorySizeType newSize)
         {
-            AddActivity($"Changed the size from {Size} to {newSize}");
-            Size = newSize;
+            if (newSize != Size)
+            {
+                AddActivity($"Changed the size from {Size} to {newSize}");
+                Size = newSize;
+            }
+            else throw new InvalidUserInputException($"Size is already set at {Size}");
+            
         }
 
         public void AddAssignee(IMember newAssignee)
         {
-            AddActivity($"Assigned to member {newAssignee}.");
-            Assignee = newAssignee;
+            if (Assignee != newAssignee)
+            {
+                AddActivity($"Assigned to member {newAssignee}.");
+                Assignee = newAssignee;
+            }
+            else throw new InvalidUserInputException($"Task is already assigned to {Assignee}");
         }
         public void RemoveAssignee()
         {

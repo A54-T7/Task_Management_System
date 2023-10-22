@@ -88,18 +88,31 @@ namespace Task_Management.Models
 
         public void ChangePriority(PriorityType newPriority)
         {
-            AddActivity($"Changed priority from {Priority} to {newPriority}");
-            Priority = newPriority;
+            if (newPriority != Priority)
+            {
+                AddActivity($"Changed priority from {Priority} to {newPriority}");
+                Priority = newPriority;
+            }
+            else throw new InvalidUserInputException($"Priority is already set at {Priority}");
+            
         }
         public void ChangeSeverity(SeverityType newSeverity)
         {
-            AddActivity($"Changed severity from {Severity} to {newSeverity}");
-            Severity = newSeverity;
+            if (newSeverity != Severity)
+            {
+                AddActivity($"Changed severity from {Severity} to {newSeverity}");
+                Severity = newSeverity;
+            }
+            else throw new InvalidUserInputException($"Severity is already set at {Severity}");
         }
         public void AddAssignee(IMember newAssignee)
         {
-            AddActivity($"Assigned to member {newAssignee}.");
-            Assignee = newAssignee;
+            if (Assignee != newAssignee)
+            {
+                AddActivity($"Assigned to member {newAssignee}.");
+                Assignee = newAssignee;
+            }
+            else throw new InvalidUserInputException($"Task is already assigned to {Assignee}");
         }
 
         public void RemoveAssignee()

@@ -68,7 +68,6 @@ namespace Task_Management.Models
                 Status++;
 
                 AddActivity($"Advanced the status from {oldStatus} to {Status}");
-
             }
             else
             {

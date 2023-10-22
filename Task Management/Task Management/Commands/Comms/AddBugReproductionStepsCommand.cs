@@ -42,6 +42,8 @@ namespace Task_Management.Commands.Comms
                 bug.AddReproduceStep(stepMessage);
             }
 
+            bug.AddActivity($"Added {stepCount} reproduction steps.");
+
             return $"Added {stepCount} step(s) to bug {bug.Title} with ID {bug.Id} successfully!";
         }
     }

@@ -75,15 +75,18 @@ namespace Task_Management.Models
         }
         public void ChangePriority(PriorityType newPriority)
         {
+            AddActivity($"Changed the priority from {Priority} to {newPriority}");
             Priority = newPriority;
         }
         public void ChangeSize(StorySizeType newSize)
         {
+            AddActivity($"Changed the size from {Size} to {newSize}");
             Size = newSize;
         }
 
         public void AddAssignee(IMember newAssignee)
         {
+            AddActivity($"Assigned to member {newAssignee}.");
             Assignee = newAssignee;
         }
         public void RemoveAssignee()
@@ -95,6 +98,7 @@ namespace Task_Management.Models
             }
             else
             {
+                AddActivity($"Unassigned member {Assignee}");
                 Assignee = null;
             }
         }
@@ -103,7 +107,10 @@ namespace Task_Management.Models
         {
             if (Status != StoryStatusType.Done)
             {
+                StoryStatusType oldStatus = Status;
                 Status++;
+
+                AddActivity($"Advanced status from {oldStatus} to {Status}");
             }
             else
             {
@@ -116,7 +123,10 @@ namespace Task_Management.Models
         {
             if (Status != StoryStatusType.NotDone)
             {
+                StoryStatusType oldStatus = Status;
                 Status--;
+
+                AddActivity($"Reverted status from {oldStatus} to {Status}");
             }
             else
             {

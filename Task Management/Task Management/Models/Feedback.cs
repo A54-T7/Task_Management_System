@@ -54,14 +54,21 @@ namespace Task_Management.Models
 
         public void ChangeRating(int newRating)
         {
+            int previousRating = Rating;
             Rating = newRating;
+
+            AddActivity($"Changed the rating from {previousRating} to {newRating}");
         }
 
         public override void AdvanceStatus()
         {
             if (Status != FeedbackStatusType.Done)
             {
+                FeedbackStatusType oldStatus = Status;
                 Status++;
+
+                AddActivity($"Advanced the status from {oldStatus} to {Status}");
+
             }
             else
             {
@@ -74,7 +81,10 @@ namespace Task_Management.Models
         {
             if (Status != FeedbackStatusType.New)
             {
+                FeedbackStatusType oldStatus = Status;
                 Status--;
+
+                AddActivity($"Reverted the status from {oldStatus} to {Status}");
             }
             else
             {

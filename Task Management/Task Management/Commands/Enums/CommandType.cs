@@ -39,6 +39,7 @@ namespace Task_Management.Commands.Enums
         ListTasks,
         AddTaskComment,
         AddBugReproductionSteps,
-        ListAssignedTasks
+        ListAssignedTasks,
+        ShowTaskActivity
     }
 }

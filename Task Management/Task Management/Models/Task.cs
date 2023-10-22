@@ -78,6 +78,7 @@ namespace Task_Management.Models
         public void AddComment(IComment comment)
         {
             comments.Add(comment);
+            AddActivity($"Member {comment.Author} added a new comment");
         }
 
         public void AddActivity(string activityMessage)
@@ -114,6 +115,22 @@ namespace Task_Management.Models
             }
 
             return sb.ToString().TrimEnd();
+        }
+
+        public string PrintActivity()
+        {
+            StringBuilder sb = new StringBuilder();
+            int counter = 1;
+
+            sb.AppendLine("Task Activity Log:");
+
+            foreach (var activity in ActivityLog)
+            {
+                sb.AppendLine($"{counter}. {activity}");
+                counter++;
+            }
+
+            return sb.ToString().Trim();
         }
 
         public abstract void AdvanceStatus();

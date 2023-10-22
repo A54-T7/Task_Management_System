@@ -17,6 +17,7 @@ namespace Task_Management.Models.Contracts
         void AddActivity(string activityMessage);
         void AdvanceStatus();
         void ReverseStatus();
+        string PrintActivity();
 
         //ToDo
 

@@ -88,14 +88,17 @@ namespace Task_Management.Models
 
         public void ChangePriority(PriorityType newPriority)
         {
+            AddActivity($"Changed priority from {Priority} to {newPriority}");
             Priority = newPriority;
         }
         public void ChangeSeverity(SeverityType newSeverity)
         {
+            AddActivity($"Changed severity from {Severity} to {newSeverity}");
             Severity = newSeverity;
         }
         public void AddAssignee(IMember newAssignee)
         {
+            AddActivity($"Assigned to member {newAssignee}.");
             Assignee = newAssignee;
         }
 
@@ -108,6 +111,7 @@ namespace Task_Management.Models
             }
             else
             {
+                AddActivity($"Unassigned member {Assignee}");
                 Assignee = null;
             }
         }
@@ -116,7 +120,10 @@ namespace Task_Management.Models
         {
             if (Status != BugStatusType.Fixed)
             {
+                BugStatusType oldStatus = Status;
                 Status++;
+
+                AddActivity($"Advanced status from {oldStatus} to {Status}");
             }
             else
             {
@@ -129,7 +136,11 @@ namespace Task_Management.Models
         {
             if (Status != BugStatusType.Active)
             {
+                BugStatusType oldStatus = Status;
                 Status--;
+
+
+                AddActivity($"Reverted status from {oldStatus} to {Status}");
             }
             else
             {

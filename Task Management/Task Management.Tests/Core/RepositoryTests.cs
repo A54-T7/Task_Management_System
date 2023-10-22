@@ -12,7 +12,7 @@ using Task_Management.Models.Contracts;
 using Task_Management.Models.Enums;
 using Task = Task_Management.Models.Task;
 
-namespace Task_Management.Tests.Models
+namespace Task_Management.Tests.Core
 {
     [TestClass]
     public class RepositoryTests
@@ -166,7 +166,7 @@ namespace Task_Management.Tests.Models
             Assert.AreEqual(new string('a', 15), bug.Title);
             Assert.AreEqual(new string('b', 15), bug.Description);
             Assert.AreEqual(PriorityType.Low, bug.Priority);
-            Assert.AreEqual(SeverityType.Major, bug.Severity); 
+            Assert.AreEqual(SeverityType.Major, bug.Severity);
         }
 
         [TestMethod]

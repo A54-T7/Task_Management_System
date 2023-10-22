@@ -8,7 +8,7 @@ using Task_Management.Models.Contracts;
 
 namespace Task_Management.Models
 {
-    internal class Team : ITeam
+    public class Team : ITeam
     {
         private const int NameMinLength = 5;
         private const int NameMaxLength = 15;

@@ -1,5 +1,6 @@
 ﻿using Task_Management.Core.Contracts;
 using Task_Management.Core;
+using Task_Management.Models;
 
 namespace Task_Management
 {
@@ -11,6 +12,8 @@ namespace Task_Management
             ICommandFactory commandFactory = new CommandFactory(repository);
             IEngine engine = new Core.Engine(commandFactory);
             engine.Start();
+            string name = "";
+            Member member = new Member(name);
         }
     }
 }

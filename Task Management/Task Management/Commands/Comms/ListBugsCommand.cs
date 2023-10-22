@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Task_Management.Core.Contracts;
 using Task_Management.Exceptions;
+using Task_Management.Models.Contracts;
 using Task_Management.Models.Enums;
 
 namespace Task_Management.Commands.Comms
@@ -31,7 +32,10 @@ namespace Task_Management.Commands.Comms
         public string ListBugs(string keyword)
         {
             StringBuilder sb = new StringBuilder();
-            var bugList = Repository.Bugs;
+            List <IBug> bugList = new List<IBug>();
+
+            IMember assigneeToFilterBy;
+            BugStatusType statusToFilterBy;
 
             switch (keyword)
             {
@@ -47,11 +51,22 @@ namespace Task_Management.Commands.Comms
                 case "SortBySeverity":
                     bugList = Repository.Bugs.OrderByDescending(bug => bug.Severity).ToList();
                     break;
-                case "FilterActive":
-                    bugList = Repository.Bugs.Where(bug => bug.Status == BugStatusType.Active).ToList();
+                case "FilterByStatus":
+                    statusToFilterBy = InputStatus();
+
+                    bugList = Repository.Bugs.Where(bug => bug.Status == statusToFilterBy).ToList(); 
                     break;
-                case "FilterFixed":
-                    bugList = Repository.Bugs.Where(bug => bug.Status == BugStatusType.Fixed).ToList();
+                case "FilterByAssignee":
+                    assigneeToFilterBy = InputAssignee();
+
+                    bugList = Repository.Bugs.Where(bug => bug.Assignee == assigneeToFilterBy).ToList();
+                    break;
+                case "FilterByStatusAndAssignee":
+                    assigneeToFilterBy = InputAssignee();
+                    statusToFilterBy = InputStatus();
+
+                    bugList = Repository.Bugs.Where(bug => bug.Assignee == assigneeToFilterBy)
+                        .Where(bug => bug.Status == statusToFilterBy).ToList();
                     break;
                 default:
                     throw new InvalidUserInputException("The input keyword was incorrect!");
@@ -63,7 +78,30 @@ namespace Task_Management.Commands.Comms
                 sb.AppendLine();
             }
 
+            if (sb.Length == 0)
+            {
+                Console.WriteLine("There are no bugs that meet the conditions!");
+            }
+
             return sb.ToString().Trim();
         }
+
+        public IMember InputAssignee()
+        {
+            Console.Write(" Assignee to filter by - ");
+            string memberName = Console.ReadLine();
+
+            return Repository.GetMember(memberName);
+        }
+
+        public BugStatusType InputStatus()
+        {
+            Console.Write(" Status to filter by - ");
+            string statusAsString = Console.ReadLine();
+            BugStatusType status = ParseBugStatusTypeParameter(statusAsString, "BugStatusType");
+
+            return status;
+        }
+
     }
 }

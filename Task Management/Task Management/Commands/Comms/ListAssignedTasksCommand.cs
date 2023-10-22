@@ -35,6 +35,9 @@ namespace Task_Management.Commands.Comms
             List<IBug> bugList = new List<IBug>();
             List<IStory> storyList = new List<IStory>();
 
+            string memberName;
+            string status;
+
             switch (keyword)
             {
                 case "SortByTitle":
@@ -45,14 +48,14 @@ namespace Task_Management.Commands.Comms
 
                     break;
                 case "FilterByAssignee":
-                    string memberName = InputMember().Name;
+                    memberName = InputAssignee().Name;
 
                     bugList = Repository.Bugs.Where(bug => bug.Assignee.Name == memberName).ToList();
                     storyList = Repository.Stories.Where(story => story.Assignee.Name == memberName).ToList();
 
                     break;
                 case "FilterByStatus":
-                    string status = InputStatus();
+                    status = InputStatus();
 
                     bugList = Repository.Bugs.Where(bug => bug.Status.ToString() == status).ToList();
                     storyList = Repository.Stories.Where(story => story.Status.ToString() == status).ToList();
@@ -60,7 +63,7 @@ namespace Task_Management.Commands.Comms
                     break;
 
                 case "FilterByStatusAndAssignee":
-                    memberName = InputMember().Name;
+                    memberName = InputAssignee().Name;
                     status = InputStatus();
 
                     bugList = Repository.Bugs.Where(bug => bug.Assignee.Name == memberName)
@@ -98,9 +101,9 @@ namespace Task_Management.Commands.Comms
             return sb.ToString().Trim();
         }
 
-        public IMember InputMember()
+        public IMember InputAssignee()
         {
-            Console.Write(" Member to filter by - ");
+            Console.Write(" Assignee to filter by - ");
             string memberName = Console.ReadLine();
 
             return Repository.GetMember(memberName);

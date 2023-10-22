@@ -70,6 +70,15 @@ namespace Task_Management.Commands
             throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid feedback status type.");
         }
 
+        protected BugStatusType ParseBugStatusTypeParameter(string value, string parameterName)
+        {
+            if (Enum.TryParse(value, true, out BugStatusType result))
+            {
+                return result;
+            }
+            throw new InvalidUserInputException($"Invalid value for {parameterName}. Should be either a valid bug status type.");
+        }
+
         protected PriorityType ParsePriorityTypeParameter(string value, string parameterName)
         {
             if (Enum.TryParse(value, true, out PriorityType result))

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Task_Management.Core.Contracts;
 using Task_Management.Exceptions;
+using Task_Management.Models.Contracts;
 using Task_Management.Models.Enums;
 
 namespace Task_Management.Commands.Comms
@@ -33,6 +35,9 @@ namespace Task_Management.Commands.Comms
             StringBuilder sb = new StringBuilder();
             var storyList = Repository.Stories;
 
+            IMember assigneeToFilterBy;
+            StoryStatusType statusToFilterBy;
+
             switch (keyword)
             {
                 case "All":
@@ -47,14 +52,19 @@ namespace Task_Management.Commands.Comms
                 case "SortBySize":
                     storyList = Repository.Stories.OrderByDescending(story => story.Size).ToList();
                     break;
-                case "FilterNotDone":
-                    storyList = Repository.Stories.Where(story => story.Status == StoryStatusType.NotDone).ToList();
+                case "FilterByStatus":
+                    statusToFilterBy = InputStatus();
+                    storyList = Repository.Stories.Where(story => story.Status == statusToFilterBy).ToList();
                     break;
-                case "FilterInProgress":
-                    storyList = Repository.Stories.Where(story => story.Status == StoryStatusType.InProgress).ToList();
+                case "FilterByAssignee":
+                    assigneeToFilterBy = InputAssignee();
+                    storyList = Repository.Stories.Where(story => story.Assignee == assigneeToFilterBy).ToList();
                     break;
-                case "FilterDone":
-                    storyList = Repository.Stories.Where(story => story.Status == StoryStatusType.Done).ToList();
+                case "FilterByStatusAndAssignee":
+                    assigneeToFilterBy = InputAssignee();
+                    statusToFilterBy = InputStatus();
+                    storyList = Repository.Stories.Where(story => story.Assignee == assigneeToFilterBy)
+                        .Where(story => story.Status == statusToFilterBy).ToList();
                     break;
                 default:
                     throw new InvalidUserInputException("The input keyword was incorrect!");
@@ -66,7 +76,29 @@ namespace Task_Management.Commands.Comms
                 sb.AppendLine();
             }
 
+            if (sb.Length == 0)
+            {
+                Console.WriteLine("There are no stories that meet the conditions!");
+            }
+
             return sb.ToString().Trim();
+        }
+
+        public IMember InputAssignee()
+        {
+            Console.Write(" Assignee to filter by - ");
+            string memberName = Console.ReadLine();
+
+            return Repository.GetMember(memberName);
+        }
+
+        public StoryStatusType InputStatus()
+        {
+            Console.Write(" Status to filter by - ");
+            string statusAsString = Console.ReadLine();
+            StoryStatusType status = ParseStoryStatusTypeParameter(statusAsString, "StoryStatusType");
+
+            return status;
         }
     }
 }

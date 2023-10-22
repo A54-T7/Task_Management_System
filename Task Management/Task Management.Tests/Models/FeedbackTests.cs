@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Task_Management.Exceptions;
 using Task_Management.Models;
+using Task_Management.Models.Enums;
 
 namespace Task_Management.Tests.Models
 {
@@ -99,6 +100,58 @@ namespace Task_Management.Tests.Models
 
             //Assert
             Assert.AreEqual(1, feedback.Comments.Count);
-        }          
+        }
+        [TestMethod]
+        public void Should_Add_ActivityLog()
+        {
+            //Arrange
+            int id = 10;
+            string title = new string('a', 15);
+            string description = new string('b', 15);
+            int rating = 5;
+            string activity = new string('a', 7);
+            Feedback member = new Feedback(id, title, description, rating);
+
+            //Act
+            member.AddActivity(activity);
+
+            //Assert
+            Assert.AreEqual(2, member.ActivityLog.Count);
+        }
+
+        [TestMethod]
+        public void Change_Rating()
+        {
+            int id = 10;
+            string title = new string('a', 15);
+            string description = new string('a', 20);
+            int rating = 5;
+            int newRating = 5;
+            string addActMess = new string('a', 5);
+
+            Feedback na = new Feedback(id, title, description, rating);
+            na.ChangeRating(newRating);
+
+            Assert.AreEqual(rating, newRating);
+        }
+
+        [TestMethod]
+        public void Should_Advance_Status()
+        {
+            //Arrange
+            int id = 10;
+            string title = new string('a', 15);
+            string description = new string('b', 15);
+            int rating = 5;
+            FeedbackStatusType status = new FeedbackStatusType();
+            FeedbackStatusType done = FeedbackStatusType.Done;
+            Feedback feedback = new Feedback(id, title, description, rating);
+
+            //Act
+            feedback.AdvanceStatus();
+
+            //Assert
+            Assert.AreNotEqual(status, done);
+        }
     }
 }
